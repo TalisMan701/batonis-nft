@@ -1,0 +1,34 @@
+@import "../../styles/extendstyle";
+
+.header{
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  padding: 24px 0;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+}
+
+.container{
+  @extend %container;
+  @include flex(flex, row nowrap, space-between, center);
+}
+
+.links{
+  @include flex(flex, row nowrap, center, center);
+  & > * {
+    margin-right: 64px;
+  }
+  & > *:last-child {
+    margin-right: 0;
+  }
+}
+
+.forUser{
+  @include flex(flex, row nowrap, center, center);
+  & > *:first-child{
+    margin-right: 32px;
+  }
+}

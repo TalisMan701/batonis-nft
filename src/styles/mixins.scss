@@ -1,0 +1,22 @@
+@mixin font ($ff, $fz, $lh, $fw) {
+  font-family: $ff, sans-serif;
+  font-size: $fz;
+  line-height: $lh;
+  font-weight: $fw;
+}
+
+@mixin position ($pos, $t, $l, $r, $b, $z) {
+  position: $pos;
+  top: $t;
+  left: $l;
+  right: $r;
+  bottom: $b;
+  z-index: $z;
+}
+
+@mixin flex ($d, $ff, $jus, $al) {
+  display: $d;
+  flex-flow: $ff;
+  justify-content: $jus;
+  align-items: $al;
+}

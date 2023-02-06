@@ -1,0 +1,65 @@
+@import "../../styles/extendstyle";
+
+.container{
+  display: inline-block;
+  position: relative;
+}
+
+.circle{
+  display: block;
+  position: absolute;
+  bottom: -8px;
+  left: -11px;
+  width: 92%;
+  height: 55%;
+  max-width: 652px;
+  max-height: 408px;
+  background-color: $energy-yellow-400;
+  border-radius: 222px;
+  z-index: -1;
+}
+
+.img{
+  width: 100%;
+  max-width: 670px;
+  animation: UpAndDown 2s infinite both ease-in-out;
+}
+
+.shadow{
+  display: block;
+  position: absolute;
+  bottom: 48px;
+  left: 17px;
+  width: 90%;
+  height: 10%;
+  max-width: 581px;
+  max-height: 50px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(134, 110, 91, 0.25) 0%, rgba(184, 159, 138, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  filter: blur(8px);
+  animation: UpAndDownForShadow 2s infinite both ease-in-out;
+}
+
+
+@keyframes UpAndDown {
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(-50px);
+  }
+  100%{
+    transform: translateY(0px);
+  }
+}
+
+@keyframes UpAndDownForShadow {
+  0%{
+    transform: scaleX(1);
+  }
+  50%{
+    transform: scaleX(0.8);
+  }
+  100%{
+    transform: scaleX(1);
+  }
+}

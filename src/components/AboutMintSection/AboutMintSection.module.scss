@@ -1,0 +1,51 @@
+@import "../../styles/extendstyle";
+
+.section{
+  margin-bottom: 300px;
+}
+
+.container{
+  @extend %container-medium;
+  position: relative;
+  @include flex(flex, row nowrap, flex-start, stretch);
+}
+
+.content{
+  width: 100%;
+  max-width: 800px;
+  margin-right: 40px;
+}
+
+.titleActive{
+  color: $whisky-sour-600;
+}
+
+.desc{
+  @extend %b-32;
+  margin-top: 24px;
+  margin-bottom: 140px;
+  letter-spacing: -0.005em;
+}
+
+.info{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  grid-column-gap: 32px;
+  margin-bottom: 64px;
+}
+
+.infoItem{
+  @include flex(flex, column, flex-start, start)
+}
+
+.infoItemTitle{
+  @extend %h4-u;
+  color: $black-600;
+  margin-bottom: 4px;
+}
+
+.infoItemSubtitle{
+  @extend %b-32;
+  color: $black-600;
+}

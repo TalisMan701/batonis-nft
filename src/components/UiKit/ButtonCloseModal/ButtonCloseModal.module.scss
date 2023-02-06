@@ -1,0 +1,20 @@
+@import "../../../styles/extendstyle";
+
+.btn{
+  width: 32px;
+  height: 32px;
+  @include flex(flex, row, center, center);
+  border-radius: 999px;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    background-color: transparentize($black-400, 0.88);
+  }
+  &:focus, &:focus-visible{
+    background-color: transparent;
+    outline: 2px solid transparentize($blackthorn-600, 0.8);
+  }
+  &:active{
+    background-color: transparentize($black-400, 0.74);
+  }
+}

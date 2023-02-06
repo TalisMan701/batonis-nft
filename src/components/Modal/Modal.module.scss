@@ -1,0 +1,31 @@
+@import "../../styles/extendstyle";
+
+.modal{
+  position: fixed;
+  inset: 0;
+  background-color: transparentize($white-1000, 0.68);
+  backdrop-filter: blur(4px);
+  @include flex(flex, column, center, center);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 999;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modalContent{
+  padding: 40px;
+  background-color: $white-1000;
+  border-radius: 32px;
+  position: relative;
+}
+
+.modalEnterDone{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modalExit{
+  opacity: 0;
+}

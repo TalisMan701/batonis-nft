@@ -1,0 +1,13 @@
+@import "../../styles/extendstyle";
+
+.section{
+  margin-bottom: 200px;
+}
+
+.container{
+  @extend %container-medium;
+}
+
+.text{
+  margin: 64px 0;
+}

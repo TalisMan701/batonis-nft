@@ -1,0 +1,26 @@
+@import "../../styles/extendstyle";
+
+.countMinted{
+  position: relative;
+  @include flex(flex, row nowrap, flex-start, start);
+  flex-grow: 1;
+}
+
+.img1{
+  position: absolute;
+  top: 40px;
+  left: 0;
+}
+
+.img2{
+  position: absolute;
+  bottom: 0;
+}
+
+.countMintedText{
+  position: absolute;
+  left: 100px;
+  bottom: 45px;
+  @extend %h4-u;
+  color: $white-1000;
+}

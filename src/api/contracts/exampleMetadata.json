@@ -1,0 +1,20 @@
+`{
+  "description": "Second NFT for batonis",
+  "external_url": "https://alchemy.com",
+  "image": "ipfs://bafybeieiqsuu2hovs2zvfdjmluu53vvthzdthznqvch3oo4lxwnp5y4x2y",
+  "name": "Dog №2",
+  "attributes": [
+    {
+      "trait_type": "Drink",
+      "value": "Cocktail from coconut"
+    },
+    {
+      "trait_type": "Style",
+      "value": "3d cartoon Pixar"
+    },
+    {
+      "trait_type": "Type Dog",
+      "value": "Corgi"
+    }
+  ]
+}`

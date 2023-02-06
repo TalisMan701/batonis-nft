@@ -1,0 +1,10 @@
+@import "../../styles/extendstyle";
+
+.logo{
+  display: inline-block;
+  @include font("Righteous-Regular", 32px, 120%, 400);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: $blackthorn-1000;
+  user-select: none;
+}

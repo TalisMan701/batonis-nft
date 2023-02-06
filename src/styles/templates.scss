@@ -1,0 +1,20 @@
+%container{
+  width: 100%;
+  max-width: $width-container-l;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+%container-medium{
+  width: 100%;
+  max-width: $width-container-m;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+%container-small{
+  width: 100%;
+  max-width: $width-container-s;
+  padding: 0 16px;
+  margin: 0 auto;
+}

@@ -1,0 +1,32 @@
+@import "../../styles/extendstyle";
+
+.footer{
+  margin-top: 160px;
+  margin-bottom: 250px;
+}
+
+.container{
+  @extend %container-small;
+  position: relative;
+  &::after{
+    content: "";
+    display: block;
+    width: 652px;
+    height: 306px;
+    left: 165px;
+    bottom: -72px;
+    z-index: -1;
+    position: absolute;
+    background-color: $energy-yellow-400;
+    border-radius: 222px;
+  }
+}
+
+.subTitle{
+  color: $whisky-sour-600;
+  margin-bottom: 24px;
+}
+
+.title{
+  margin-bottom: 24px;
+}

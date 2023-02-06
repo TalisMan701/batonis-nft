@@ -1,0 +1,50 @@
+@import "../../styles/extendstyle";
+
+.section{
+  margin-top: 160px;
+  margin-bottom: 240px;
+}
+
+.container{
+  @extend %container;
+  @include flex(flex, row nowrap, space-between, start);
+  position: relative;
+}
+
+.content{
+  margin-top: 20px;
+}
+
+.subTitle{
+  color: $whisky-sour-600;
+  margin-bottom: 24px;
+}
+
+.activeText{
+  color: $blackthorn-600;
+  padding: 0 14px;
+  margin: 0 -14px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 80px;
+  &:hover{
+    color: $white-1000;
+    background-color: $blackthorn-600;
+  }
+}
+
+.selectText{
+  position: relative;
+  &::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: calc(100% + 28px);
+    bottom: 10px;
+    left: 0;
+    z-index: -1;
+    height: 45px;
+    background-color: $whisky-sour-500;
+    filter: blur(13px);
+    border-radius: 32px 32px 6px 64px;
+  }
+}

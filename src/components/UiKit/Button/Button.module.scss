@@ -1,0 +1,57 @@
+@import "../../../styles/extendstyle";
+
+.btn{
+  cursor: pointer;
+  padding: 15px 20px;
+  //display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  @extend %btn-m;
+  border-radius: $border-radius-btn-t-m;
+  background-color: $blackthorn-600;
+  color: $white-1000;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+  &.btnL{
+    @extend %btn-l;
+    padding: 29px 44px;
+    border-radius: $border-radius-btn-t-l;
+  }
+  &.onlyIcon{
+    border-radius: $border-radius-btn-i;
+    @include flex(flex, row, center, center);
+    width: 57px;
+    height: 57px;
+    padding: 0;
+  }
+  &.secondary{
+    background-color: $blackthorn-1000;
+  }
+}
+
+.btn:hover{
+  background-color: $blackthorn-700;
+  &.secondary{
+    background-color: $blackthorn-600;
+  }
+}
+
+.btn:focus, .btn:focus-visible{
+  background-color: $blackthorn-600;
+  outline: 4px solid transparentize($blackthorn-600, 0.8);
+  &.secondary{
+    background-color: $blackthorn-1000;
+  }
+}
+
+.btn:active{
+  background-color: $blackthorn-900;
+  &.secondary{
+    background-color: $blackthorn-800;
+  }
+}
+
+.disable{
+  background-color: $blackthorn-300;
+}

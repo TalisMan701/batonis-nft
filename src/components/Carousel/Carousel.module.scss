@@ -1,0 +1,21 @@
+@import "../../styles/extendstyle";
+
+.container{
+  width: 100%;
+  @include flex(flex, row nowarp, flex-start, center);
+  padding: 16px 0;
+  & > .img{
+    margin-right: 32px;
+  }
+  & > .img:last-child{
+    margin-right: 0;
+  }
+}
+
+.img{
+  width: 400px;
+  height: 400px;
+  //filter: drop-shadow(4px 6px 34px rgba(26, 22, 51, 0.08));
+  box-shadow: 4px 6px 34px rgba(26, 22, 51, 0.08);
+  border-radius: 20px;
+}

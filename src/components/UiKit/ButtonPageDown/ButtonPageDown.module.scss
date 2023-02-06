@@ -1,0 +1,22 @@
+@import "../../../styles/extendstyle";
+
+.btn{
+  padding: 114px 42px;
+  @extend %h4-u;
+  color: transparent;
+  background-color: transparent;
+  border-radius: 999px;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    color: $blackthorn-600;
+    background-color: transparentize($white-1000, 0.77);
+  }
+  &:active{
+    color: $blackthorn-800;
+    background-color: transparentize($white-1000, 0.60);
+  }
+  &:focus, &:focus-visible{
+    outline: none;
+  }
+}

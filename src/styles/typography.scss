@@ -1,0 +1,51 @@
+%btn-m{
+  @include font("Balsamiq-Regular", 28px, 28px, 400);
+}
+
+%btn-l{
+  @include font("Balsamiq-Regular", 48px, 48px, 400);
+}
+
+%h1{
+  @include font("Righteous-Regular", 96px, 125%, 400);
+}
+
+%h1-u{
+  @include font("Righteous-Regular", 96px, 125%, 400);
+  text-transform: uppercase;
+}
+
+%h2{
+  @include font("Righteous-Regular", 72px, 125%, 400);
+}
+
+%h2-u{
+  @include font("Righteous-Regular", 72px, 125%, 400);
+  text-transform: uppercase;
+}
+
+%h3{
+  @include font("Righteous-Regular", 56px, 120%, 400);
+}
+
+%h3-u{
+  @include font("Righteous-Regular", 56px, 120%, 400);
+  text-transform: uppercase;
+}
+
+%h4{
+  @include font("Righteous-Regular", 40px, 120%, 400);
+}
+
+%h4-u{
+  @include font("Righteous-Regular", 40px, 120%, 400);
+  text-transform: uppercase;
+}
+
+%b-32{
+  @include font("Balsamiq-Regular", 32px, 125%, 400);
+}
+
+%b-24{
+  @include font("Balsamiq-Regular", 24px, 125%, 400);
+}
