@@ -4,8 +4,7 @@ import Socials from '../Socials/Socials';
 import Button from '../UiKit/Button/Button';
 import Link from '../UiKit/Link/Link';
 import Logo from '../Logo/Logo';
-import Modal from '../Modal/Modal';
-import {ReactComponent as MetamaskSVG} from '../../assets/icons/metamask.svg';
+import ModalConnectWallet from '../ModalConnectWallet/ModalConnectWallet';
 
 const Header = () => {
     const [connectWalletModalIsOpen, setConnectWalletModalIsOpen] = useState(false)
@@ -25,9 +24,7 @@ const Header = () => {
                     </div>
                 </div>
             </header>
-            <Modal isOpen={connectWalletModalIsOpen} handleClose={()=>setConnectWalletModalIsOpen(false)}>
-                <Button icon={<MetamaskSVG/>} label={'Connect Metamask'} iconDirection={'left'} color={'secondary'}/>
-            </Modal>
+            <ModalConnectWallet isOpen={connectWalletModalIsOpen} handleClose={()=>setConnectWalletModalIsOpen(false)}/>
         </>
     );
 };

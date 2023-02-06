@@ -10,6 +10,12 @@ import InfinityText from '../../components/InfinityText/InfinityText';
 import ReactPortal from '../../components/ReactPortal/ReactPortal';
 
 const App = () => {
+    const {ethereum} = window;
+    const [currentAccount, setCurrentAccount] = useState('');
+    const [isRightChainId, setIsRightChainId] = useState(false)
+
+
+
     return (
         <>
             <Header/>

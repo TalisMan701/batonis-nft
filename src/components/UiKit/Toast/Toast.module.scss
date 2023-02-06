@@ -1,0 +1,17 @@
+@import "../../../styles/extendstyle";
+
+.toast {
+  background-color: $blackthorn-600;
+  border-radius: 24px;
+  max-width: 480px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+  margin-top: 16px;
+  display: flex;
+  position: relative;
+}
+
+.toastContentWrapper {
+  padding: 16px 32px;
+  @extend %b-24;
+  color: $white-1000;
+}
