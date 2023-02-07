@@ -67,11 +67,8 @@ export async function connectWallet() {
 
     try {
         if (!ethereum) {
-            alert('Please install Metamask!');
-
             throw new Error('No Metamask installed');
         }
-
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
         return accounts[0];
@@ -104,4 +101,61 @@ export async function disconnectWallet() {
 
         return false;
     }
+}
+
+export async function checkChainId(chainId?: string) {
+    const { ethereum } = window;
+
+    if (!ethereum) {
+        return false;
+    }
+
+    const userChainId   = parseInt(chainId || await ethereum.request({ method: 'eth_chainId' }));
+    const properChainId = parseInt(`${ worknet.workChainId }`);
+
+    return userChainId === properChainId;
+}
+
+export async function changeChainId(): Promise<void> {
+    const { ethereum } = window;
+
+    try {
+        return await ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{
+                chainId: ethers.utils.hexValue(worknet.workChainId)
+            }]
+        });
+    }
+    catch (err) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if (err.code === 4902) {
+            await addChainId();
+            return changeChainId();
+        }
+
+        console.error(err);
+    }
+}
+
+export async function addChainId() {
+    const { ethereum } = window;
+
+    await ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+            {
+                chainId: ethers.utils.hexValue(worknet.workChainId),
+                chainName: worknet.chainName,
+                nativeCurrency: {
+                    name: worknet.coinName,
+                    symbol: worknet.symbol,
+                    decimals: worknet.decimals
+                },
+                blockExplorerUrls: [worknet.explorerUrl],
+                rpcUrls: [worknet.rpcUrl],
+            }
+        ]
+    });
 }

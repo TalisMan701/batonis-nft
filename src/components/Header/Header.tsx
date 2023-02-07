@@ -4,10 +4,18 @@ import Socials from '../Socials/Socials';
 import Button from '../UiKit/Button/Button';
 import Link from '../UiKit/Link/Link';
 import Logo from '../Logo/Logo';
-import ModalConnectWallet from '../ModalConnectWallet/ModalConnectWallet';
+import {useUser} from '../../contexts/User/useUser';
 
 const Header = () => {
-    const [connectWalletModalIsOpen, setConnectWalletModalIsOpen] = useState(false)
+    const user = useUser();
+    const [hoverState, setHoverState] = useState(false)
+
+    let buttonText = 'Connect wallet';
+
+    if(user.currentAccount){
+        buttonText = hoverState ? 'Disconnect' : user.currentAccount.slice(0, 5) + '...' + user.currentAccount.slice(-5);
+    }
+
     return (
         <>
             <header className={classes.header}>
@@ -20,11 +28,16 @@ const Header = () => {
                     </nav>
                     <div className={classes.forUser}>
                         <Socials/>
-                        <Button label={'MInt NFt'} onClick={()=>setConnectWalletModalIsOpen(true)}/>
+                        <Button
+                            style={{width: 240}}
+                            label={buttonText}
+                            onClick={()=>user.currentAccount ? user.disconnectWallet() : user.connectWallet()}
+                            onMouseEnter={(e)=>setHoverState(true)}
+                            onMouseLeave={(e)=>setHoverState(false)}
+                        />
                     </div>
                 </div>
             </header>
-            <ModalConnectWallet isOpen={connectWalletModalIsOpen} handleClose={()=>setConnectWalletModalIsOpen(false)}/>
         </>
     );
 };

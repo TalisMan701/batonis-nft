@@ -13,11 +13,13 @@ interface IModal {
 const Modal: FC<IModal> = ({isOpen, handleClose, children}) => {
     const nodeRef = useRef<HTMLDivElement>(null);
 
-    if(isOpen){
-        document.body.style.overflow = 'hidden'
-    } else{
-        document.body.style.overflow = 'auto'
-    }
+    useEffect(()=>{
+        if(isOpen){
+            document.body.style.overflow = 'hidden'
+        } else{
+            document.body.style.overflow = 'hidden auto'
+        }
+    },[isOpen])
 
     useEffect(() => {
         const closeOnEscapeKey = (e: KeyboardEvent) => e.key === 'Escape' ? handleClose() : null;

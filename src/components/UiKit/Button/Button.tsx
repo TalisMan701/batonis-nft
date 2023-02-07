@@ -1,4 +1,4 @@
-import React, {CSSProperties, FC} from 'react';
+import React, {CSSProperties, FC, MouseEventHandler} from 'react';
 import classes from './Button.module.scss';
 
 interface IButtonAsideProps {
@@ -7,6 +7,8 @@ interface IButtonAsideProps {
     size?: 'l' | 'm';
     onClick?: () => void;
     color?: 'primary' | 'secondary';
+    onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void;
+    onMouseLeave?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 type IButtonAsidePropsWithIcon =
@@ -15,12 +17,18 @@ type IButtonAsidePropsWithIcon =
 
 type MainProps = IButtonAsideProps & IButtonAsidePropsWithIcon;
 
-const Button: FC<MainProps> = ({label, style, icon, iconDirection, size = 'm', onClick, color = 'primary'}) => {
+const Button: FC<MainProps> = ({label, style, icon, iconDirection, size = 'm', onClick, color = 'primary', onMouseEnter, onMouseLeave}) => {
     const classNames = `${classes.btn} ${size === 'l' ? classes.btnL : ''} ${color === 'secondary' ? classes.secondary : ''} ${!label && icon ? classes.onlyIcon : ''}`;
 
     if (label) {
         return (
-            <div className={classNames} style={{...style}} onClick={onClick}>
+            <div
+                className={classNames}
+                style={{...style}}
+                onClick={onClick}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+            >
                 <>
                     {icon && iconDirection === 'left' && icon}
                     <span style={{marginLeft: iconDirection === 'left' ? 12 : 0, marginRight: iconDirection === 'right' ? 12 : 0}}>{label}</span>

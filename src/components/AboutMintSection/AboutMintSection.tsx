@@ -2,8 +2,10 @@ import React from 'react';
 import classes from './AboutMintSection.module.scss';
 import Button from '../UiKit/Button/Button';
 import CountMinted from '../CountMinted/CountMinted';
+import {useUser} from '../../contexts/User/useUser';
 
 const AboutMintSection = () => {
+    const user = useUser();
     return (
         <section className={classes.section}>
             <div className={classes.container}>
@@ -24,7 +26,7 @@ const AboutMintSection = () => {
                             <span className={classes.infoItemSubtitle}>per wallet</span>
                         </div>
                     </div>
-                    <Button label={'Mint NFT'} size={'l'}/>
+                    <Button label={'Mint NFT'} size={'l'} onClick={()=>user.currentAccount ? user.setMintModalIsOpen(true) : user.setConnectWalletModalIsOpen(true)}/>
                 </div>
                 <CountMinted/>
             </div>
