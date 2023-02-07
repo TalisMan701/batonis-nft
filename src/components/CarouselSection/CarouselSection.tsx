@@ -48,7 +48,7 @@ const itemForCarousel = [
 const CarouselSection = () => {
     const scope = useRef<HTMLDivElement>(null)
     return (
-        <section ref={scope} className={classes.section}>
+        <section id={'collection'} ref={scope} className={classes.section}>
             <Carousel items={itemForCarousel} scope={scope} direction={'left'}/>
             <div className={classes.container}>
                 <h3 className={classes.text}>We introduce baton to share <br/> our agency spirit</h3>

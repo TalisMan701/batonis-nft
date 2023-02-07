@@ -1,7 +1,7 @@
-import deploy from "./_deploy";
+import deploy from './_deploy';
 
 const contractName = 'BatonisNFT';
-const contractArguments = ['BatonisNFT', 'BTN'];
+const contractArguments = ['BatonisNFT', 'BTN', 'http://localhost:8080'];
 
 deploy(contractName, contractArguments)
     .then(() => process.exit(0))

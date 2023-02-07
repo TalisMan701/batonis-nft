@@ -9,7 +9,7 @@ const AboutMintSection = () => {
     const {currentAccount} = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     return (
-        <section className={classes.section}>
+        <section id={'story'} className={classes.section}>
             <div className={classes.container}>
                 <div className={classes.content}>
                     <h3>

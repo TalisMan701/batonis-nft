@@ -2,7 +2,7 @@ import '@nomiclabs/hardhat-waffle';
 import '@nomiclabs/hardhat-etherscan';
 import env from './env';
 
-import type { HardhatUserConfig } from "hardhat/config";
+import type { HardhatUserConfig } from 'hardhat/config';
 
 const {
   // hardhat globals

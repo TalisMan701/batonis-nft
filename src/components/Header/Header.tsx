@@ -24,9 +24,9 @@ const Header = () => {
                 <div className={classes.container}>
                     <Logo label={'Batonis'}/>
                     <nav className={classes.links}>
-                        <Link href={'#'} mode={'secondary'}>Collection</Link>
-                        <Link href={'#'} mode={'secondary'}>Story</Link>
-                        <Link href={'#'} mode={'secondary'}>Projects</Link>
+                        <Link href={'#collection'} mode={'secondary'}>Collection</Link>
+                        <Link href={'#story'} mode={'secondary'}>Story</Link>
+                        <Link href={'#projects'} mode={'secondary'}>Projects</Link>
                     </nav>
                     <div className={classes.forUser}>
                         <Socials/>
