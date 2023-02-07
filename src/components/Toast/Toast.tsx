@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import classes from './Toast.module.scss';
-import ButtonCloseModal from '../ButtonCloseModal/ButtonCloseModal';
-import {useTimeout} from '../../../hooks/useTimeout';
+import ButtonCloseModal from '../UiKit/ButtonCloseModal/ButtonCloseModal';
+import {useTimeout} from '../../hooks/useTimeout';
 
 interface IToastProps {
     close: () => void,

@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useRef} from 'react';
 import classes from './Modal.module.scss';
-import ReactPortal from '../../ReactPortal/ReactPortal';
+import ReactPortal from '../ReactPortal/ReactPortal';
 import { CSSTransition } from 'react-transition-group';
-import ButtonCloseModal from '../ButtonCloseModal/ButtonCloseModal';
+import ButtonCloseModal from '../UiKit/ButtonCloseModal/ButtonCloseModal';
 
 interface IModal {
     isOpen: boolean

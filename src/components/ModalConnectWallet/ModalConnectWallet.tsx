@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from 'react';
 import Button from '../UiKit/Button/Button';
 import {ReactComponent as MetamaskSVG} from '../../assets/icons/metamask.svg';
-import Modal from '../UiKit/Modal/Modal';
-import {useToast} from '../UiKit/Toast';
-import {useUser} from '../../contexts/User/useUser';
+import Modal from '../Modal/Modal';
+import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
+import {_connectWallet} from '../../store/reducers/UserReducer/UserActionCreators';
 
 interface IModalConnectWalletProps {
     isOpen: boolean,
@@ -11,18 +11,16 @@ interface IModalConnectWalletProps {
 }
 
 const ModalConnectWallet: FC<IModalConnectWalletProps> = ({isOpen, handleClose}) => {
-    const user = useUser();
+    const user = useAppSelector(state => state.user);
+    const dispatch = useAppDispatch()
     useEffect(()=>{
         if(user.currentAccount){
             handleClose()
         }
     },[user.currentAccount])
-    useEffect(()=>{
-        console.log('Connect')
-    })
     return (
         <Modal isOpen={isOpen} handleClose={handleClose}>
-            <Button icon={<MetamaskSVG/>} label={'Connect Metamask'} iconDirection={'left'} color={'secondary'} onClick={user.connectWallet}/>
+            <Button icon={<MetamaskSVG/>} label={'Connect Metamask'} iconDirection={'left'} color={'secondary'} onClick={()=>dispatch(_connectWallet())}/>
         </Modal>
     );
 };

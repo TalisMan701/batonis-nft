@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './Header.module.scss'
 import Socials from '../Socials/Socials';
 import Button from '../UiKit/Button/Button';
 import Link from '../UiKit/Link/Link';
 import Logo from '../Logo/Logo';
-import {useUser} from '../../contexts/User/useUser';
+import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
+import {_connectWallet, _disconnectWallet} from '../../store/reducers/UserReducer/UserActionCreators';
 
 const Header = () => {
-    const user = useUser();
+    const user = useAppSelector(state => state.user)
+    const dispatch = useAppDispatch();
     const [hoverState, setHoverState] = useState(false)
 
     let buttonText = 'Connect wallet';
@@ -31,7 +33,7 @@ const Header = () => {
                         <Button
                             style={{width: 240}}
                             label={buttonText}
-                            onClick={()=>user.currentAccount ? user.disconnectWallet() : user.connectWallet()}
+                            onClick={()=>user.currentAccount ? dispatch(_disconnectWallet()) : dispatch(_connectWallet())}
                             onMouseEnter={(e)=>setHoverState(true)}
                             onMouseLeave={(e)=>setHoverState(false)}
                         />
@@ -42,4 +44,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default React.memo(Header);

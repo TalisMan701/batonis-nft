@@ -1,7 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import classes from './ModalMint.module.scss';
-import Modal from '../UiKit/Modal/Modal';
-import {useUser} from '../../contexts/User/useUser';
+import Modal from '../Modal/Modal';
 
 interface IModalMintProps {
     isOpen: boolean,
@@ -9,10 +8,6 @@ interface IModalMintProps {
 }
 
 const ModalMint: FC<IModalMintProps> = ({isOpen, handleClose}) => {
-    const user = useUser();
-    useEffect(()=>{
-        console.log('Mint')
-    })
     return (
         <Modal isOpen={isOpen} handleClose={handleClose}>
             <div>Тут будет рулетка</div>
@@ -20,4 +15,4 @@ const ModalMint: FC<IModalMintProps> = ({isOpen, handleClose}) => {
     );
 };
 
-export default React.memo(ModalMint);
+export default React.memo(ModalMint, (prevProps, nextProps) => prevProps.isOpen === nextProps.isOpen);
