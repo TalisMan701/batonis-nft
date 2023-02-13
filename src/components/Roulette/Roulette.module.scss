@@ -1,0 +1,17 @@
+@import "../../styles/extendstyle";
+
+.container{
+  position: relative;
+  @extend %container;
+  overflow: hidden;
+}
+
+.wrapper{
+  @include flex(flex, row nowrap, flex-start, center);
+}
+
+.overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #FCEED6 0%, rgba(252, 238, 214, 0) 33.52%, rgba(252, 238, 214, 0) 50.19%, rgba(252, 238, 214, 0) 66.86%, #FCEED6 100%);
+}

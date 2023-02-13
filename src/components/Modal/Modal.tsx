@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef} from 'react';
+import React, {CSSProperties, FC, useEffect, useRef} from 'react';
 import classes from './Modal.module.scss';
 import ReactPortal from '../ReactPortal/ReactPortal';
 import { CSSTransition } from 'react-transition-group';
@@ -8,9 +8,10 @@ interface IModal {
     isOpen: boolean
     handleClose: () => void
     children: React.ReactNode
+    styleModalContent?: CSSProperties
 }
 
-const Modal: FC<IModal> = ({isOpen, handleClose, children}) => {
+const Modal: FC<IModal> = ({isOpen, handleClose, children, styleModalContent}) => {
     const nodeRef = useRef<HTMLDivElement>(null);
 
     useEffect(()=>{
@@ -44,7 +45,7 @@ const Modal: FC<IModal> = ({isOpen, handleClose, children}) => {
                 nodeRef={nodeRef}
             >
                 <div ref={nodeRef} className={classes.modal}>
-                    <div className={classes.modalContent}>
+                    <div className={classes.modalContent} style={{...styleModalContent}}>
                         <ButtonCloseModal onClick={handleClose} style={{position: 'absolute', top: -40, right: -40}}/>
                         {children}
                     </div>

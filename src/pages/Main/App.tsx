@@ -16,6 +16,7 @@ import {_eventOnChangeChain, _eventOnChangeWallet} from '../../store/reducers/Us
 import {changeChainId, worknet} from '../../api/web3';
 import ToastWrapper from '../../components/Toast/ToastWrapper';
 import {toastsSlice} from '../../store/reducers/ToastsReducer/ToastsSlice';
+import Roulette from '../../components/Roulette/Roulette';
 
 const App = () => {
     const {connectWalletModalIsOpen, mintModalIsOpen} = useAppSelector(state => state.modals);
@@ -40,7 +41,7 @@ const App = () => {
     return (
         <>
             <Header/>
-            <WelcomeSection/>
+            {/* <WelcomeSection/>
             <CarouselSection/>
             <AboutMintSection/>
             <InfinityText>
@@ -49,7 +50,8 @@ const App = () => {
                 <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
                 <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
             </InfinityText>
-            <Footer/>
+            <Footer/>*/}
+            <Roulette/>
 
             <ModalConnectWallet isOpen={connectWalletModalIsOpen} handleClose={()=>dispatch(modalsSlice.actions.setConnectWalletModalIsOpen(false))}/>
             <ModalMint isOpen={mintModalIsOpen} handleClose={() => dispatch(modalsSlice.actions.setMintModalIsOpen(false))}/>
