@@ -3,11 +3,27 @@
 .container{
   position: relative;
   @extend %container;
-  overflow: hidden;
+  padding: 0;
 }
 
 .wrapper{
+  overflow: hidden;
+}
+
+.items{
   @include flex(flex, row nowrap, flex-start, center);
+  transition: transform 10s cubic-bezier(0.23, 0.78, 0.29, 1);
+}
+
+.bg{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 45%;
+  transform: translate(-50%, -50%);
+  background-color: $energy-yellow-400;
+  border-radius: 222px;
+  z-index: -1;
 }
 
 .overlay{
