@@ -5,7 +5,7 @@ interface IButtonAsideProps {
     label?: string;
     style?: CSSProperties;
     size?: 'l' | 'm';
-    onClick?: () => void;
+    onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void;
     color?: 'primary' | 'secondary';
     onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void;
     onMouseLeave?: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -38,7 +38,13 @@ const Button: FC<MainProps> = ({label, style, icon, iconDirection, size = 'm', o
         );
     }
     return (
-        <div className={classNames} style={{...style}}>
+        <div
+            className={classNames}
+            style={{...style}}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+        >
             {icon}
         </div>
     );

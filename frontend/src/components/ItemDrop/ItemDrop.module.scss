@@ -1,0 +1,49 @@
+@import "../../styles/extendstyle";
+
+.wrapper{
+  height: calc(100vh - 120px);
+  margin-top: -48px;
+  padding-top: 48px;
+  @extend %container;
+  @include flex(flex, column, center, center);
+  h3 {
+    margin-bottom: 24px;
+    span{
+      color: $whisky-sour-600;
+    }
+  }
+  p{
+    @extend %b-32;
+    margin-bottom: 24px;
+  }
+  .imgWrapper{
+    position: relative;
+    .img{
+      width: 100%;
+      max-width: 400px;
+      max-height: 400px;
+      border-radius: 20px;
+    }
+    .bg{
+      position: absolute;
+      bottom: -48px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140%;
+      max-width: 652px;
+      height: 306px;
+      border-radius: 222px;
+      background-color: $energy-yellow-400;
+      z-index: -1;
+    }
+  }
+  @media (max-width: 560px) {
+    h3 {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
+    p{
+      font-size: 22px;
+    }
+  }
+}

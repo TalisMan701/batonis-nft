@@ -17,11 +17,14 @@ import {changeChainId, worknet} from '../../api/web3';
 import ToastWrapper from '../../components/Toast/ToastWrapper';
 import {toastsSlice} from '../../store/reducers/ToastsReducer/ToastsSlice';
 import Roulette from '../../components/Roulette/Roulette';
+import ItemDrop from '../../components/ItemDrop/ItemDrop';
+import {useMatchMedia} from '../../hooks/useMatchMedia';
 
 const App = () => {
     const {connectWalletModalIsOpen, mintModalIsOpen} = useAppSelector(state => state.modals);
     const {isRightChainId} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch()
+    const {isMobile, isTablet, isDesktop, isDesktopXL} = useMatchMedia();
     useEffect(()=>{
         dispatch(_eventOnChangeWallet())
         dispatch(_eventOnChangeChain())
@@ -51,7 +54,8 @@ const App = () => {
                 <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
             </InfinityText>
             <Footer/>*/}
-            <Roulette/>
+             <Roulette sizeItems={isMobile ? 275 : isTablet ? 350 : 400}/>
+            {/* <ItemDrop/>*/}
 
             <ModalConnectWallet isOpen={connectWalletModalIsOpen} handleClose={()=>dispatch(modalsSlice.actions.setConnectWalletModalIsOpen(false))}/>
             <ModalMint isOpen={mintModalIsOpen} handleClose={() => dispatch(modalsSlice.actions.setMintModalIsOpen(false))}/>
