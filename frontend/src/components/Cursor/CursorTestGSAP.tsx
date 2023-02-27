@@ -1,13 +1,14 @@
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useEffect, useId, useLayoutEffect, useRef, useState} from 'react';
 import classes from './Cursor.module.scss';
 import gsap from 'gsap';
 import pawDog from '../../assets/icons/paw-dog.svg';
+import {generateUEID} from '../../utils/generateUEID';
 
 interface trackItem {
     x: number;
     y: number;
     rotate: number;
-    id: number;
+    id: string;
     direction: number;
 }
 
@@ -72,7 +73,7 @@ const CursorTestGSAP = () => {
                     x: clientX - xDifT / 2 + dy,
                     y: clientY - yDifT / 2 + dx,
                     rotate: rotate.current * RAD2DEG,
-                    id: Date.now(),
+                    id: generateUEID() + Date.now(),
                     direction: dd / step,
                 });
                 if (track.current.length > 6) {

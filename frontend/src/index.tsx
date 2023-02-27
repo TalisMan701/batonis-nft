@@ -15,3 +15,6 @@ root.render(
         <App />
     </Provider>
 );
+// eslint-disable-next-line
+// @ts-ignore
+window.store = store

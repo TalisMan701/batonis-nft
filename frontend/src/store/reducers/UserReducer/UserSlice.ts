@@ -11,12 +11,7 @@ interface UserState {
     iHaveDrop: boolean
     myDrop: INFTData | null
     fetchMint: boolean
-    ethPrice: number
-    priceMint: number
-    allowance: number
-    balance: number
-    mintedCount: number
-    maxSupply: number
+    mintStage: string
 }
 
 const initialState: UserState = {
@@ -28,12 +23,7 @@ const initialState: UserState = {
     iHaveDrop: false,
     myDrop: null,
     fetchMint: false,
-    ethPrice: +getFromLocalStorage('ethPrice', 3200),
-    priceMint: +getFromLocalStorage('priceMint', 1e16),
-    allowance: 0,
-    balance: 0,
-    mintedCount: 0,
-    maxSupply: +getFromLocalStorage('maxSupply', 20)
+    mintStage: ''
 }
 
 export const userSlice = createSlice({
@@ -52,6 +42,7 @@ export const userSlice = createSlice({
         onRoulette(state, action: PayloadAction<INFTData>){
             state.fetchMint = false
             state.myDrop = action.payload
+            state.mintStage = ''
         },
         setIHaveDrop(state, action: PayloadAction<boolean>){
           state.iHaveDrop = action.payload
@@ -59,6 +50,14 @@ export const userSlice = createSlice({
         clickLogo(state){
             state.goRoulette = false
             state.iHaveDrop = false
+        },
+        breakingMint(state){
+            state.goRoulette = false
+            state.iHaveDrop = false
+            state.fetchMint = false
+            state.fetchBuildRoulette = false
+            state.myDrop = null
+            state.mintStage = ''
         },
         setFetchBuildRoulette(state, action: PayloadAction<boolean>){
             state.fetchBuildRoulette = action.payload
@@ -68,6 +67,9 @@ export const userSlice = createSlice({
         },
         setFetchMint(state, action: PayloadAction<boolean>){
             state.fetchMint = action.payload
+        },
+        setMintStage(state, action: PayloadAction<string>){
+            state.mintStage = action.payload
         }
     }
 })

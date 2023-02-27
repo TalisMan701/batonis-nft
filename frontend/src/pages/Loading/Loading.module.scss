@@ -8,3 +8,27 @@
   @include flex(flex, column, center, center);
   background-color: $whisky-sour-200;
 }
+
+.stage{
+  @extend %b-24;
+  color: $black-400;
+  margin-top: 12px;
+  position: relative;
+  &:after{
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-animation: ellipsis steps(4,end) 1.5s infinite;
+    animation: ellipsis steps(4,end) 1.5s infinite;
+    content: "\2026"; /* ascii code for the ellipsis character */
+    width: 0px;
+    position: absolute;
+    margin-left: 2px;
+  }
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}

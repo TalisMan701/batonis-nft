@@ -22,6 +22,7 @@ import {useMatchMedia} from '../../hooks/useMatchMedia';
 import Loading from '../Loading/Loading';
 import {userSlice} from '../../store/reducers/UserReducer/UserSlice';
 import ContractController from '../../components/ContractController/ContractController';
+import Button from '../../components/UiKit/Button/Button';
 
 const App = () => {
     const {connectWalletModalIsOpen, mintModalIsOpen} = useAppSelector(state => state.modals);
@@ -41,7 +42,7 @@ const App = () => {
             dispatch(toastsSlice.actions.show(
                 <span>
                     You are not on the {worknet.chainName} network.
-                    Please <a className="link" onClick={changeChainId}>Switch Network</a>
+                    Please <Button size={'s'} label={'Switch Network'} onClick={changeChainId}/>
                 </span>
             ))
         }

@@ -18,6 +18,12 @@
     padding: 29px 44px;
     border-radius: $border-radius-btn-t-l;
   }
+  &.btnS{
+    @extend %b-24;
+    text-transform: uppercase;
+    color: $energy-yellow-400;
+    padding: 4px 8px;
+  }
   &.onlyIcon{
     border-radius: $border-radius-btn-i;
     @include flex(flex, row, center, center);

@@ -15,7 +15,7 @@ const Logo: FC<LogoProps> = ({label, style}) => {
     return (
         <Link mode={'secondary'} href={'#'} onClick={()=>{
             if(iHaveDrop && goRoulette){
-                dispatch(userSlice.actions.clickLogo())
+                dispatch(userSlice.actions.breakingMint())
             }
         }} className={classes.logo} style={{...style}} disable={!iHaveDrop && goRoulette}>
             {label}

@@ -10,6 +10,7 @@ import Loading from '../../pages/Loading/Loading';
 import {approvePaymentToken, buyProcess, changeChainId, checkChainId, getPaymentAllowance} from '../../api/web3';
 import {getFromLocalStorage} from '../../utils/localstorage';
 import {_connectWallet, _mint} from '../../store/reducers/UserReducer/UserActionCreators';
+import {generateUEID} from '../../utils/generateUEID';
 
 const items: INFTData[] = [
     {
@@ -173,7 +174,7 @@ const chancedRandom = (chances: Chances) => {
 };
 
 const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
-    const {iHaveDrop, currentAccount, fetchMint, fetchBuildRoulette, myDrop} = useAppSelector(state => state.user)
+    const {iHaveDrop, currentAccount, fetchMint, fetchBuildRoulette, myDrop, mintStage} = useAppSelector(state => state.user)
     const dispatch = useAppDispatch()
     const [properties, setProperties] = useState<{
         result: INFTData;
@@ -223,7 +224,7 @@ const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
     const classNamesDrop = `${classes.img} ${iHaveDrop ? classes.drop: ''}`;
     const classNamesItems = `${classes.items} ${iHaveDrop ? classes.itemsForDrop: ''}`;
 
-    if(fetchMint || fetchBuildRoulette) return <Loading/>
+    if(fetchMint || fetchBuildRoulette) return <Loading stage={mintStage} infinity={true}/>
 
     return (
         <div className={classes.container}>
@@ -236,13 +237,13 @@ const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
                 }
                 <div className={classNamesItems} style={{transform: `translateX(${iHaveDrop ? 0 : margin}px)`}}>
                     {!iHaveDrop && properties?.itemsBefore.map((item) => (
-                        <RouletteItem key={item.id} item={{...item, size: sizeItems, margin: marginItem}}/>
+                        <RouletteItem key={`${item.id}` + generateUEID()} item={{...item, size: sizeItems, margin: marginItem}}/>
                     ))}
                     {properties &&
                         <img className={classNamesDrop} src={properties.result.img} alt="Your NFT" style={{minWidth: sizeItems, height: sizeItems, margin: `0 ${marginItem}px`}}/>
                     }
                     {!iHaveDrop &&properties?.itemsAfter.map((item) => (
-                        <RouletteItem key={item.id} item={{...item, size: sizeItems, margin: marginItem}}/>
+                        <RouletteItem key={`${item.id}` + generateUEID()} item={{...item, size: sizeItems, margin: marginItem}}/>
                     ))}
                 </div>
                 <div className={classNamesBG} style={{height: sizeItems*1.3}}/>

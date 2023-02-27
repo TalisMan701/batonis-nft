@@ -28,6 +28,17 @@
   bottom: -434px;
   left: -303px;
   animation: 2s circle ease-in-out;
+  &.infinity{
+    animation-iteration-count: infinite;
+    animation-name: circleBoth;
+    animation-duration: 3s;
+  }
+  &[playanimation='running']{
+    animation-play-state: running;
+  }
+  &[playanimation='paused']{
+    animation-play-state: paused;
+  }
 }
 
 @keyframes circle {
@@ -36,5 +47,17 @@
   }
   100%{
     box-shadow: inset 0px 0px 0px 0px $whisky-sour-200;
+  }
+}
+
+@keyframes circleBoth {
+  0%{
+    box-shadow: inset 0px 0px 0px 230px $whisky-sour-200;
+  }
+  50%{
+    box-shadow: inset 0px 0px 0px 0px $whisky-sour-200;
+  }
+  100%{
+    box-shadow: inset 0px 0px 0px 230px $whisky-sour-200;
   }
 }

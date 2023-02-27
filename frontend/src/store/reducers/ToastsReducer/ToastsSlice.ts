@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import React from 'react';
+import {generateUEID} from '../../../utils/generateUEID';
 
 interface IToastItem {
     id: string | number
@@ -12,16 +13,6 @@ interface ToastsState {
 
 const initialState: ToastsState = {
     toasts: []
-}
-
-// Create a random ID
-function generateUEID() {
-    let first: string | number = (Math.random() * 46656) | 0;
-    let second: string | number = (Math.random() * 46656) | 0;
-    first = ('000' + first.toString(36)).slice(-3);
-    second = ('000' + second.toString(36)).slice(-3);
-
-    return first + second;
 }
 
 export const toastsSlice = createSlice({

@@ -4,7 +4,7 @@ import classes from './Button.module.scss';
 interface IButtonAsideProps {
     label?: string;
     style?: CSSProperties;
-    size?: 'l' | 'm';
+    size?: 'l' | 'm' | 's';
     onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void;
     color?: 'primary' | 'secondary';
     onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -18,7 +18,7 @@ type IButtonAsidePropsWithIcon =
 type MainProps = IButtonAsideProps & IButtonAsidePropsWithIcon;
 
 const Button: FC<MainProps> = ({label, style, icon, iconDirection, size = 'm', onClick, color = 'primary', onMouseEnter, onMouseLeave}) => {
-    const classNames = `${classes.btn} ${size === 'l' ? classes.btnL : ''} ${color === 'secondary' ? classes.secondary : ''} ${!label && icon ? classes.onlyIcon : ''}`;
+    const classNames = `${classes.btn} ${size === 'l' ? classes.btnL : ''} ${size === 's' ? classes.btnS : ''} ${color === 'secondary' ? classes.secondary : ''} ${!label && icon ? classes.onlyIcon : ''}`;
 
     if (label) {
         return (
