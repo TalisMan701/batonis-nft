@@ -12,7 +12,7 @@ export async function getPriceToken(target: string, currency: string) {
 }
 
 export async function getSignature(encodeAddress: string) {
-    const response = await fetch(`http://backend:8080/api/v0/sign?key=${ encodeAddress }`, {
+    const response = await fetch(`https://nft.batonis.tech/backend/api/v0/sign?key=${ encodeAddress }`, {
         method: 'GET',
         credentials: 'include',
         headers: {
