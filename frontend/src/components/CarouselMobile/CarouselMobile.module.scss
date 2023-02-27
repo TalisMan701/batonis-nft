@@ -4,6 +4,7 @@
   width: 100%;
   @include flex(flex, row nowarp, flex-start, center);
   padding: 16px 0;
+  user-select: none;
 }
 
 .img{

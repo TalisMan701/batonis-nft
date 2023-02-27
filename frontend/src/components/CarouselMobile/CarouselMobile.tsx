@@ -17,7 +17,7 @@ const CarouselMobile: FC<CarouselMobileProps> = ({items, direction = 'left', ite
     return (
         <Marquee className={classes.container} gradient={false} direction={direction} speed={100}>
             {items.map(item => (
-                <img style={{width: itemSize, height: itemSize}} className={classes.img} src={item.url} key={item.id} alt={`item${item.id}`}/>
+                <img draggable={false} style={{width: itemSize, height: itemSize}} className={classes.img} src={item.url} key={item.id} alt={`item${item.id}`}/>
             ))}
         </Marquee>
     );

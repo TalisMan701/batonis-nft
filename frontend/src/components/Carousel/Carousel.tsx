@@ -49,7 +49,7 @@ const Carousel: FC<ICarouselProps> = ({items, direction= 'left', scope, itemSize
     return (
         <div className={classes.container} ref={target}>
             {items.map(item => (
-                <img style={{width: itemSize, height: itemSize}} className={classes.img} src={item.url} key={item.id} alt={`item${item.id}`}/>
+                <img draggable={false} style={{width: itemSize, height: itemSize}} className={classes.img} src={item.url} key={item.id} alt={`item${item.id}`}/>
             ))}
         </div>
     );

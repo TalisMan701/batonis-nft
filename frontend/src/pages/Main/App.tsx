@@ -30,9 +30,6 @@ const App = () => {
     const dispatch = useAppDispatch()
     const {isMobile, isTablet, isDesktop, isDesktopXL} = useMatchMedia();
     useEffect(()=>{
-        setTimeout(()=>{
-            dispatch(userSlice.actions.setIsLoading(false))
-        },2000)
         dispatch(_eventOnChangeWallet())
         dispatch(_eventOnChangeChain())
     },[])
@@ -50,6 +47,9 @@ const App = () => {
 
     useEffect(()=>{
         if(isLoading){
+            setTimeout(()=>{
+                dispatch(userSlice.actions.setIsLoading(false))
+            },2000)
             document.body.style.overflow = 'hidden'
         } else{
             document.body.style.overflow = 'hidden auto'
@@ -82,7 +82,7 @@ const App = () => {
 
             <ModalConnectWallet isOpen={connectWalletModalIsOpen} handleClose={()=>dispatch(modalsSlice.actions.setConnectWalletModalIsOpen(false))}/>
             {/* <ModalMint isOpen={mintModalIsOpen} handleClose={() => dispatch(modalsSlice.actions.setMintModalIsOpen(false))}/>*/}
-            <ContractController/>
+            {/* <ContractController/>*/}
             <ToastWrapper/>
 
             {!isMobile &&
