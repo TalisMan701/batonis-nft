@@ -14,7 +14,7 @@ interface LinkProps {
 const Link: FC<LinkProps> = ({mode, children, href, style, onClick, className, disable = false}) => {
     const classNames = `${classes.link} ${mode === 'primary' ? classes.primary : classes.secondary} ${className} ${disable ? classes.disable : ''}`
     return (
-        <a href={href} className={classNames} style={{...style}} onClick={()=>{
+        <a draggable={false} href={href} className={classNames} style={{...style}} onClick={()=>{
             if(!disable && onClick){
                 onClick()
             }
