@@ -82,7 +82,7 @@ const App = () => {
 
             <ModalConnectWallet isOpen={connectWalletModalIsOpen} handleClose={()=>dispatch(modalsSlice.actions.setConnectWalletModalIsOpen(false))}/>
             {/* <ModalMint isOpen={mintModalIsOpen} handleClose={() => dispatch(modalsSlice.actions.setMintModalIsOpen(false))}/>*/}
-             <ContractController/>
+            {/* <ContractController/>*/}
             <ToastWrapper/>
 
             {!isMobile &&
