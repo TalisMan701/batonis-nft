@@ -8,7 +8,7 @@ interface IButtonPageDownProps {
 
 const ButtonPageDown: FC<IButtonPageDownProps> = ({label, style}) => {
     return (
-        <a href={'#collection'} className={classes.btn} style={{...style}}>
+        <a draggable={false} href={'#collection'} className={classes.btn} style={{...style}}>
             {label}
         </a>
     );

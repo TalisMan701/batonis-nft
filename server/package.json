@@ -19,10 +19,7 @@
       "envalid": "^7.3.1",
       "ethers": "^6.0.8",
       "express": "^4.17.2",
-      "ipfs-core": "^0.18.0",
-      "ipfs-http-client": "^50.1.2",
       "lodash": "^4.17.21",
-      "redis": "^4.6.4",
       "web3": "^1.8.2",
       "web3-core": "^1.8.2",
       "zod": "^3.20.2"

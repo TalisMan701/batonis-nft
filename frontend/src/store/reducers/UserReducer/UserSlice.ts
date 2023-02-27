@@ -58,6 +58,7 @@ export const userSlice = createSlice({
             state.fetchBuildRoulette = false
             state.myDrop = null
             state.mintStage = ''
+            state.isLoading = true
         },
         setFetchBuildRoulette(state, action: PayloadAction<boolean>){
             state.fetchBuildRoulette = action.payload

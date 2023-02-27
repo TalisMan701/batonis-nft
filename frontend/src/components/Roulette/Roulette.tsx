@@ -232,7 +232,7 @@ const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
                 {iHaveDrop &&
                     <div>
                         <h3>Your <span>Baton</span></h3>
-                        <p>Only 30% users have the same</p>
+                        {/* <p>Only 30% users have the same</p>*/}
                     </div>
                 }
                 <div className={classNamesItems} style={{transform: `translateX(${iHaveDrop ? 0 : margin}px)`}}>
@@ -240,7 +240,7 @@ const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
                         <RouletteItem key={`${item.id}` + generateUEID()} item={{...item, size: sizeItems, margin: marginItem}}/>
                     ))}
                     {properties &&
-                        <img className={classNamesDrop} src={properties.result.img} alt="Your NFT" style={{minWidth: sizeItems, height: sizeItems, margin: `0 ${marginItem}px`}}/>
+                        <img draggable={false} className={classNamesDrop} src={properties.result.img} alt="Your NFT" style={{minWidth: sizeItems, height: sizeItems, margin: `0 ${marginItem}px`}}/>
                     }
                     {!iHaveDrop &&properties?.itemsAfter.map((item) => (
                         <RouletteItem key={`${item.id}` + generateUEID()} item={{...item, size: sizeItems, margin: marginItem}}/>
