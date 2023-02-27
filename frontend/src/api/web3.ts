@@ -298,5 +298,5 @@ function _ipfsToUrl(url: any) {
         return '';
     }
 
-    return url.replace('ipfs://', 'https://ipfs.io/ipfs/');
+    return url.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/');
 }

@@ -94,8 +94,9 @@ export const _mint = (currentAccount: string) => async (dispatch: AppDispatch) =
                 dispatch(userSlice.actions.setMintStage('Get image'))
                 const tokenId = getTokenId(tx);
                 // todo починить функцию loadNFTImage ( там _ipfsToUrl получается baseURI Без слеша в конце, т.е. норм ссылку закинуть в baseURI. И в принципе залить в ipfs хранилище картинки и нормик будет)
-                // const imageUrl = await loadNFTImage(tokenId);
-                dispatch(userSlice.actions.onRoulette({id: tokenId ?? 1, img: 'https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg', cid: 'temp', rarity: 'common'}))
+                const imageUrl = await loadNFTImage(tokenId);
+                console.log(imageUrl)
+                dispatch(userSlice.actions.onRoulette({id: tokenId ?? 1, img: imageUrl ?? 'https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg', cid: 'temp', rarity: 'common'}))
             } catch (err: any){
                 console.error('Get token ID with tx', err)
                 // todo показать заглушка по типу с вопросительным знаком потому что не удалось получить картинку
