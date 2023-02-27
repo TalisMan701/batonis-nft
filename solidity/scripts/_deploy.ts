@@ -56,7 +56,7 @@ export default async function deploy(contractName: string, constructorArguments:
 }
 
 function saveFrontendFiles(contracts: { [key: string]: Contract; }){
-  const contractsDir = path.join(__dirname, "/../..", "src/api/contracts")
+  const contractsDir = path.join(__dirname, "/../..", "frontend/src/api/contracts")
   if(!fs.existsSync(contractsDir)){
     fs.mkdirSync(contractsDir)
   }

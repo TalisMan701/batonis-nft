@@ -4,10 +4,11 @@ import Button from '../UiKit/Button/Button';
 import CountMinted from '../CountMinted/CountMinted';
 import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
 import {modalsSlice} from '../../store/reducers/ModalsReducer/ModalsSlice';
+import {useMatchMedia} from '../../hooks/useMatchMedia';
+import {userSlice} from '../../store/reducers/UserReducer/UserSlice';
+import MintButton from '../MintButton/MintButton';
 
 const AboutMintSection = () => {
-    const {currentAccount} = useAppSelector((state) => state.user);
-    const dispatch = useAppDispatch();
     return (
         <section id={'story'} className={classes.section}>
             <div className={classes.container}>
@@ -24,7 +25,7 @@ const AboutMintSection = () => {
                     </p>
                     <div className={classes.info}>
                         <div className={classes.infoItem}>
-                            <span className={classes.infoItemTitle}>10 items</span>
+                            <span className={classes.infoItemTitle}>20 items</span>
                             <span className={classes.infoItemSubtitle}>in collection</span>
                         </div>
                         <div className={classes.infoItem}>
@@ -36,15 +37,7 @@ const AboutMintSection = () => {
                             <span className={classes.infoItemSubtitle}>per wallet</span>
                         </div>
                     </div>
-                    <Button
-                        label={'Mint NFT'}
-                        size={'l'}
-                        onClick={() =>
-                            currentAccount
-                                ? dispatch(modalsSlice.actions.setMintModalIsOpen(true))
-                                : dispatch(modalsSlice.actions.setConnectWalletModalIsOpen(true))
-                        }
-                    />
+                    <MintButton/>
                 </div>
                 <CountMinted />
             </div>

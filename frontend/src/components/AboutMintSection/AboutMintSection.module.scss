@@ -1,7 +1,15 @@
 @import "../../styles/extendstyle";
 
 .section{
+  padding-top: 110px;
+  margin-top: -110px;
   margin-bottom: 300px;
+  @media (max-width: $tabletWidth) {
+
+  }
+  @media (max-width: $mobileWidth) {
+    margin-bottom: 90px;
+  }
 }
 
 .container{
@@ -14,6 +22,15 @@
   width: 100%;
   max-width: 800px;
   margin-right: 40px;
+  @media (max-width: $mobileWidth) {
+    margin-right: 0;
+  }
+}
+
+h3{
+  @media (max-width: $mobileWidth) {
+    font-size: 26px !important;
+  }
 }
 
 .titleActive{
@@ -25,6 +42,10 @@
   margin-top: 24px;
   margin-bottom: 140px;
   letter-spacing: -0.005em;
+  @media (max-width: $mobileWidth) {
+    font-size: 24px !important;
+    margin-bottom: 54px;
+  }
 }
 
 .info{
@@ -33,19 +54,34 @@
   width: 100%;
   grid-column-gap: 32px;
   margin-bottom: 64px;
+  @media (max-width: $mobileWidth) {
+    grid-template-columns: 40%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 16px;
+    margin-bottom: 48px;
+  }
 }
 
 .infoItem{
-  @include flex(flex, column, flex-start, start)
+  @include flex(flex, column, flex-start, start);
 }
 
 .infoItemTitle{
   @extend %h4-u;
   color: $black-600;
   margin-bottom: 4px;
+  white-space: nowrap;
+  @media (max-width: $mobileWidth) {
+    font-size: 20px !important;
+  }
 }
 
 .infoItemSubtitle{
   @extend %b-32;
   color: $black-600;
+  white-space: nowrap;
+  @media (max-width: $mobileWidth) {
+    font-size: 24px !important;
+  }
 }

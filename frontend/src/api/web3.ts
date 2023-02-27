@@ -1,5 +1,7 @@
 import {ContractInterface, ethers} from 'ethers';
 import { mainnet, testnet } from './const';
+import {getSignature} from './api';
+import walletEncoder from '../utils/encoder';
 
 export const worknet = testnet;
 
@@ -116,16 +118,17 @@ export async function checkChainId(chainId?: string) {
     return userChainId === properChainId;
 }
 
-export async function changeChainId(): Promise<void> {
+export async function changeChainId(): Promise<boolean> {
     const { ethereum } = window;
 
     try {
-        return await ethereum.request({
+        await ethereum.request({
             method: 'wallet_switchEthereumChain',
             params: [{
                 chainId: ethers.utils.hexValue(worknet.workChainId)
             }]
         });
+        return true
     }
     catch (err) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -134,7 +137,7 @@ export async function changeChainId(): Promise<void> {
             await addChainId();
             return changeChainId();
         }
-
+        return false
         console.error(err);
     }
 }
@@ -158,4 +161,142 @@ export async function addChainId() {
             }
         ]
     });
+}
+
+export async function approvePaymentToken(count: number) {
+    const paymentContract = getPaymentContract();
+
+    return paymentContract.approve(worknet.saleAddress, count.toString());
+}
+
+export async function getPaymentBalance(userAddress: string) {
+    const paymentContract = getPaymentContract();
+
+    return paymentContract.balanceOf(userAddress);
+}
+
+export async function getPaymentAllowance(userAddress = worknet.saleAddress) {
+    const paymentContract = getPaymentContract();
+    const allowanceBN = await paymentContract.allowance(userAddress, worknet.saleAddress);
+
+    return +allowanceBN.toString();
+}
+
+export async function getFromContract(method: string, ...args: any) {
+    const contract = getContract();
+
+    if (typeof contract[method] !== 'function') {
+        console.warn(`Non exist method ${ method }`, contract);
+        return null;
+    }
+
+    return contract[method](...args);
+}
+
+export async function getMaxSupply() {
+    const max = await getFromContract('MAX_ELEMENTS');
+
+    return Number.isNaN(+max) ? null : parseInt(max);
+}
+
+export async function getPurchasedCount() {
+    return parseInt(await getFromContract('totalSupply'));
+}
+
+export async function getPrice() {
+    return parseInt(await getFromContract('price'));
+}
+
+export async function saleIsOpen() {
+    return !!(await getFromContract('saleState'));
+}
+
+export async function tokenURI(tokenId: number | string) {
+    const url = await getFromContract('tokenURI', tokenId);
+
+    return url;
+}
+
+export async function mint(sig: string) {
+    const contract = getContract();
+
+    return contract.mint(sig);
+}
+
+export async function buyProcess(userWallet: string, priceNFT: number) {
+    // Check token balance
+    const balance = await getPaymentBalance(userWallet);
+
+    if (balance < priceNFT) {
+        throw new Error(`Not enough balance. Current balance: ${ balance }`);
+    }
+
+    // Checks token allowance
+    const allowance = await getPaymentAllowance(userWallet);
+
+    if (allowance < priceNFT) {
+        await approvePaymentToken(priceNFT);
+    }
+
+    // Checks sale state
+    if (!await saleIsOpen()) {
+        throw new Error('Sale not active');
+    }
+
+    // Get signature from backend
+    let signature;
+
+    try {
+        signature = await getSignature(walletEncoder(userWallet));
+    }
+    catch (err) {
+        console.error('Feiled to get signature, original error: ', err);
+        throw new Error('Failed to get a signature');
+    }
+
+    // Mint ntf
+    return mint(signature);
+}
+
+export function parseLogs(logs = []) {
+    const iface = new ethers.utils.Interface(worknet.saleAbi);
+
+    return logs.map((log) => {
+        try {
+            return iface.parseLog(log);
+        }
+        catch (err) {
+            return null;
+        }
+    }).filter(parsed => parsed);
+}
+
+export function getTokenId(tx: any) {
+    const log = parseLogs(tx.logs).find((log: any) => log.name === 'Transfer');
+    console.log(log)
+    const tokenId = log && log.args.tokenId;
+
+    return tokenId && tokenId.toString() || tokenId;
+}
+
+export async function loadNFTImage(tokenId: string | number) {
+    const url = await tokenURI(tokenId);
+    console.log(url)
+    const response = await fetch(_ipfsToUrl(url), {
+        headers: {
+            accept: 'application/json'
+        }
+    });
+
+    const metadata = await response.json();
+
+    return _ipfsToUrl(metadata.image);
+}
+
+function _ipfsToUrl(url: any) {
+    if (typeof url !== 'string') {
+        return '';
+    }
+
+    return url.replace('ipfs://', 'https://ipfs.io/ipfs/');
 }

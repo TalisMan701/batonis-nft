@@ -32,4 +32,7 @@
   color: $white-1000;
   transform: rotate(3deg);
   padding: 20px 40px;
+  @media (max-width: $mobileWidth) {
+    font-size: 24px !important;
+  }
 }

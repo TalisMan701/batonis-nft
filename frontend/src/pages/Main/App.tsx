@@ -19,13 +19,19 @@ import {toastsSlice} from '../../store/reducers/ToastsReducer/ToastsSlice';
 import Roulette from '../../components/Roulette/Roulette';
 import ItemDrop from '../../components/ItemDrop/ItemDrop';
 import {useMatchMedia} from '../../hooks/useMatchMedia';
+import Loading from '../Loading/Loading';
+import {userSlice} from '../../store/reducers/UserReducer/UserSlice';
+import ContractController from '../../components/ContractController/ContractController';
 
 const App = () => {
     const {connectWalletModalIsOpen, mintModalIsOpen} = useAppSelector(state => state.modals);
-    const {isRightChainId} = useAppSelector(state => state.user);
+    const {isRightChainId, isLoading, goRoulette, iHaveDrop} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch()
     const {isMobile, isTablet, isDesktop, isDesktopXL} = useMatchMedia();
     useEffect(()=>{
+        setTimeout(()=>{
+            dispatch(userSlice.actions.setIsLoading(false))
+        },2000)
         dispatch(_eventOnChangeWallet())
         dispatch(_eventOnChangeChain())
     },[])
@@ -41,30 +47,48 @@ const App = () => {
         }
     }, [isRightChainId])
 
+    useEffect(()=>{
+        if(isLoading){
+            document.body.style.overflow = 'hidden'
+        } else{
+            document.body.style.overflow = 'hidden auto'
+        }
+    },[isLoading])
+
     return (
         <>
+            {isLoading &&
+                <Loading/>
+            }
             <Header/>
-            {/* <WelcomeSection/>
-            <CarouselSection/>
-            <AboutMintSection/>
-            <InfinityText>
-                <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
-                <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
-                <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
-                <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
-            </InfinityText>
-            <Footer/>*/}
-             <Roulette sizeItems={isMobile ? 275 : isTablet ? 350 : 400}/>
-            {/* <ItemDrop/>*/}
+            {!goRoulette?
+                <>
+                    <WelcomeSection/>
+                    <CarouselSection/>
+                    <AboutMintSection/>
+                    <InfinityText>
+                        <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
+                        <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
+                        <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
+                        <span style={{margin: '0px 16px'}}>Get site for your NFT collection</span>
+                    </InfinityText>
+                    <Footer/>
+                </>:
+                <>
+                    <Roulette sizeItems={isMobile ? 250 : isTablet ? 330 : 400} marginItem={isMobile ? 8 : 16}/>
+                </>
+            }
 
             <ModalConnectWallet isOpen={connectWalletModalIsOpen} handleClose={()=>dispatch(modalsSlice.actions.setConnectWalletModalIsOpen(false))}/>
-            <ModalMint isOpen={mintModalIsOpen} handleClose={() => dispatch(modalsSlice.actions.setMintModalIsOpen(false))}/>
-
+            {/* <ModalMint isOpen={mintModalIsOpen} handleClose={() => dispatch(modalsSlice.actions.setMintModalIsOpen(false))}/>*/}
+            <ContractController/>
             <ToastWrapper/>
 
-            <ReactPortal wrapperId={'react-portal-cursor-container'}>
-                <CursorTestGSAP/>
-            </ReactPortal>
+            {!isMobile &&
+                <ReactPortal wrapperId={'react-portal-cursor-container'}>
+                    <CursorTestGSAP/>
+                </ReactPortal>
+            }
         </>
     );
 };

@@ -20,7 +20,15 @@
 .countMintedText{
   position: absolute;
   left: 100px;
-  bottom: 45px;
+  bottom: 35px;
   @extend %h4-u;
   color: $white-1000;
+  @media (max-width: $tabletWidth) {
+    left: -250px;
+  }
+  @media (max-width: $tabletWidth) {
+    left: -180px;
+    bottom: 140px;
+    font-size: 20px !important;
+  }
 }

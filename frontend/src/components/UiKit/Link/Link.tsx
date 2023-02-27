@@ -6,12 +6,19 @@ interface LinkProps {
     children?: React.ReactNode;
     href: string;
     style?: CSSProperties;
+    onClick?: ()=>void;
+    className?: string;
+    disable?: boolean;
 }
 
-const Link: FC<LinkProps> = ({mode, children, href, style}) => {
-    const classNames = `${classes.link} ${mode === 'primary' ? classes.primary : classes.secondary}`
+const Link: FC<LinkProps> = ({mode, children, href, style, onClick, className, disable = false}) => {
+    const classNames = `${classes.link} ${mode === 'primary' ? classes.primary : classes.secondary} ${className} ${disable ? classes.disable : ''}`
     return (
-        <a href={href} className={classNames} style={{...style}}>
+        <a href={href} className={classNames} style={{...style}} onClick={()=>{
+            if(!disable && onClick){
+                onClick()
+            }
+        }}>
             {children}
         </a>
     );

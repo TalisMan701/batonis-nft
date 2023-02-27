@@ -1,0 +1,10 @@
+@import "../../styles/extendstyle";
+
+.wrapper{
+  position: fixed;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  @include flex(flex, column, center, center);
+  background-color: $whisky-sour-200;
+}

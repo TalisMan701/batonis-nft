@@ -8,6 +8,7 @@
   border-radius: 999px;
   user-select: none;
   transition: all 0.2s ease-in-out;
+  text-decoration: none;
   &:hover{
     color: $blackthorn-600;
     background-color: transparentize($white-1000, 0.77);

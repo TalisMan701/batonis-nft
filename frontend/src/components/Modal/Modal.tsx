@@ -46,7 +46,7 @@ const Modal: FC<IModal> = ({isOpen, handleClose, children, styleModalContent}) =
             >
                 <div ref={nodeRef} className={classes.modal}>
                     <div className={classes.modalContent} style={{...styleModalContent}}>
-                        <ButtonCloseModal onClick={handleClose} style={{position: 'absolute', top: -40, right: -40}}/>
+                        <ButtonCloseModal onClick={handleClose} className={classes.btnClose}/>
                         {children}
                     </div>
                 </div>

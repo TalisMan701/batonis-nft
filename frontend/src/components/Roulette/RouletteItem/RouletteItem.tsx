@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import classes from './RouletteItem.module.scss';
-import {NFTData} from '../Roulette';
+import {INFTData} from '../../../models/INFTData';
 
 interface RouletteItemProps {
-    item: NFTData & {size: number, margin: number};
+    item: INFTData & {size: number, margin: number};
 }
 
 const RouletteItem: FC<RouletteItemProps> = ({item}) => {

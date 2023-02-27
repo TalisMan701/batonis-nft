@@ -1,29 +1,3 @@
-<svg width="625" height="646" viewBox="0 0 625 646" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_ddi_49_601)">
-<path d="M65.32 324.508C36.8552 153.709 146.499 81.6528 249.021 49.9533C255.4 47.9809 262.364 48.8129 267.568 52.9977C363.062 129.799 529.677 551.278 384.468 420.039C272.305 318.665 215.166 312.447 189.774 376.131C171.726 421.397 82.6916 428.744 65.32 324.508Z" fill="white" fill-opacity="0.64" shape-rendering="crispEdges"/>
-</g>
-<defs>
-<filter id="filter0_ddi_49_601" x="0.746094" y="0.935547" width="628.765" height="644.248" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dx="15" dy="15"/>
-<feGaussianBlur stdDeviation="10"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.560784 0 0 0 0 0.4 0 0 0 0 0.121569 0 0 0 0.04 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_49_601"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dx="64" dy="76"/>
-<feGaussianBlur stdDeviation="62"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0.560784 0 0 0 0 0.4 0 0 0 0 0.121569 0 0 0 0.1 0"/>
-<feBlend mode="normal" in2="effect1_dropShadow_49_601" result="effect2_dropShadow_49_601"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_49_601" result="shape"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dx="6" dy="9"/>
-<feGaussianBlur stdDeviation="3"/>
-<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
-<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.34 0"/>
-<feBlend mode="normal" in2="shape" result="effect3_innerShadow_49_601"/>
-</filter>
-</defs>
+<svg width="208" height="346" viewBox="0 0 208 346" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M150.454 1.15476C116.523 22.339 113.914 71.5462 53.882 149.756C37.5263 171.064 25.5699 191.514 17.1365 210.754C-6.83034 265.434 -2.34391 310.346 10.4825 337.42C12.86 342.439 18.1528 345.301 23.7045 345.176C144.065 342.464 191.777 284.929 204.362 217.641C223.271 116.533 162.869 -6.59643 150.454 1.15476Z" fill="#F1BB5C"/>
 </svg>

@@ -2,26 +2,29 @@ import React, {FC, RefObject, useLayoutEffect, useRef} from 'react';
 import classes from './Carousel.module.scss';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import {useMatchMedia} from '../../hooks/useMatchMedia';
 
 gsap.registerPlugin(ScrollTrigger)
 
 interface IItem {
     id: number,
-    url: string
+    url: string,
 }
 
 interface ICarouselProps {
     items: IItem[],
     direction?: 'left' | 'right',
-    scope: RefObject<HTMLDivElement>
+    scope: RefObject<HTMLDivElement>,
+    itemSize?: number
 }
 
-const Carousel: FC<ICarouselProps> = ({items, direction= 'left', scope}) => {
+const Carousel: FC<ICarouselProps> = ({items, direction= 'left', scope, itemSize = 400}) => {
     const target = useRef<HTMLDivElement>(null)
+    const {isMobile} = useMatchMedia()
     useLayoutEffect(()=>{
         let startX = 0
         if(target.current){
-            startX = direction === 'left' ? 120 : -(4288 - window.innerWidth) - 120
+            startX = direction === 'left' ? 120 : -(items.length*(itemSize+32)- 32 - window.innerWidth) - 120
         }
         const ctx = gsap.context(()=>{
             gsap.set(target.current,{
@@ -29,10 +32,13 @@ const Carousel: FC<ICarouselProps> = ({items, direction= 'left', scope}) => {
             })
             gsap.to(target.current, {
                 scrollTrigger: {
-                    trigger: scope.current,
+                    trigger: target.current,
                     scrub: 0.5,
+                    start: 'top 85%',
+                    end: 'bottom 15%',
+                    markers: false
                 },
-                x: () => direction === 'left' ? startX - 500 : startX + 500
+                x: () => direction === 'left' ? startX - (items.length*itemSize)/1.35 : startX + (items.length*itemSize)/1.35
             })
         }, target)
         return () => {
@@ -43,7 +49,7 @@ const Carousel: FC<ICarouselProps> = ({items, direction= 'left', scope}) => {
     return (
         <div className={classes.container} ref={target}>
             {items.map(item => (
-                <img className={classes.img} src={item.url} key={item.id} alt={`item${item.id}`}/>
+                <img style={{width: itemSize, height: itemSize}} className={classes.img} src={item.url} key={item.id} alt={`item${item.id}`}/>
             ))}
         </div>
     );

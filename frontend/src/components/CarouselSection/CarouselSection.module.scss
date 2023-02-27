@@ -1,7 +1,15 @@
 @import "../../styles/extendstyle";
 
 .section{
+  padding-top: 110px;
+  margin-top: -110px;
   margin-bottom: 200px;
+  @media (max-width: $tabletWidth) {
+    margin-bottom: 120px;
+  }
+  @media (max-width: $mobileWidth) {
+    margin-bottom: 60px;
+  }
 }
 
 .container{
@@ -10,4 +18,11 @@
 
 .text{
   margin: 64px 0;
+  @media (max-width: $tabletWidth) {
+    margin: 48px 0;
+  }
+  @media (max-width: $mobileWidth) {
+    font-size: 26px !important;
+    margin: 24px 0;
+  }
 }

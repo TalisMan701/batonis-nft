@@ -1,6 +1,6 @@
 @import "../../../styles/extendstyle";
 
-.link{
+.link:link, .link:visited{
   @extend %b-24;
   user-select: none;
   transition: color 0.2s ease-in-out;
@@ -13,12 +13,12 @@
   text-decoration: none;
 }
 
-.link:hover{
+.link:not(.disable):hover, .link:not(.disable):visited:hover{
     color: $blackthorn-700;
 }
 
-.link:focus, .link:focus-visible{
-  outline: 2px solid transparentize($blackthorn-600, 0.8);
+.link:not(.disable):focus, .link:not(.disable):focus-visible, .link:not(.disable):visited:focus, .link:not(.disable):visited:focus-visible{
+  outline: none;
   &.primary{
     color: $blackthorn-600;
   }
@@ -27,10 +27,11 @@
   }
 }
 
-.link:active{
+.link:not(.disable):active, .link:not(.disable):visited:active{
   color: $blackthorn-900;
 }
 
 .disable{
-  color: $black-400;
+  color: $black-400 !important;
+  pointer-events: none;
 }

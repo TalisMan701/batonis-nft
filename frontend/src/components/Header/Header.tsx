@@ -41,33 +41,40 @@ const Header = () => {
                 <div className={classes.container}>
                     <Logo label={'Batonis'}/>
                     <div ref={refDropdownMenu}  className={classes.dropdownMenuWrapper}>
-                        <Button onClick={()=>setShowDropdownMenu(prev => !prev)} icon={showDropdownMenu ? <CloseSVG/> :<BurgerSVG/>} iconDirection={'left'} color={'secondary'}/>
-                        <CSSTransition
-                            in={showDropdownMenu}
-                            timeout={{ exit: 300 }}
-                            unmountOnExit
-                            classNames={{
-                                enterDone: classes.dropdownMenuEnterDone,
-                                exitActive: classes.dropdownMenuExit,
-                            }}
-                            nodeRef={nodeRef}
-                        >
-                            <div ref={nodeRef} className={classes.dropdownMenu}>
-                                <nav className={classes.links}>
-                                    <Link href={'#collection'} mode={'secondary'}>Collection</Link>
-                                    <Link href={'#story'} mode={'secondary'}>Story</Link>
-                                    <Link href={'#projects'} mode={'secondary'}>Projects</Link>
-                                </nav>
-                                <Socials/>
-                                <Button
-                                    style={{width: '100%', marginTop: 24}}
-                                    label={buttonText}
-                                    onClick={()=>user.currentAccount ? dispatch(_disconnectWallet()) : dispatch(_connectWallet())}
-                                    onMouseEnter={(e)=>setHoverState(true)}
-                                    onMouseLeave={(e)=>setHoverState(false)}
-                                />
+                        {!user.goRoulette ?
+                            <>
+                                <Button onClick={()=>setShowDropdownMenu(prev => !prev)} icon={showDropdownMenu ? <CloseSVG/> :<BurgerSVG/>} iconDirection={'left'} color={'secondary'}/>
+                                <CSSTransition
+                                    in={showDropdownMenu}
+                                    timeout={{ exit: 300 }}
+                                    unmountOnExit
+                                    classNames={{
+                                        enterDone: classes.dropdownMenuEnterDone,
+                                        exitActive: classes.dropdownMenuExit,
+                                    }}
+                                    nodeRef={nodeRef}
+                                >
+                                    <div ref={nodeRef} className={classes.dropdownMenu}>
+                                        <nav className={classes.links}>
+                                            <Link href={'#collection'} mode={'secondary'}>Collection</Link>
+                                            <Link href={'#story'} mode={'secondary'}>Story</Link>
+                                            <Link href={'#projects'} mode={'secondary'}>Projects</Link>
+                                        </nav>
+                                        <Socials/>
+                                        <Button
+                                            style={{width: '100%', marginTop: 24}}
+                                            label={buttonText}
+                                            onClick={()=>user.currentAccount ? dispatch(_disconnectWallet()) : dispatch(_connectWallet())}
+                                            onMouseEnter={(e)=>setHoverState(true)}
+                                            onMouseLeave={(e)=>setHoverState(false)}
+                                        />
+                                    </div>
+                                </CSSTransition>
+                            </>:
+                            <div className={classes.address}>
+                                {user.currentAccount.slice(0, 5) + '...' + user.currentAccount.slice(-5)}
                             </div>
-                        </CSSTransition>
+                        }
                     </div>
                 </div>
             </header>
@@ -79,21 +86,28 @@ const Header = () => {
             <header className={classes.header}>
                 <div className={classes.container}>
                     <Logo label={'Batonis'}/>
-                    <nav className={classes.links}>
-                        <Link href={'#collection'} mode={'secondary'}>Collection</Link>
-                        <Link href={'#story'} mode={'secondary'}>Story</Link>
-                        <Link href={'#projects'} mode={'secondary'}>Projects</Link>
-                    </nav>
-                    <div className={classes.forUser}>
-                        <Socials/>
-                        <Button
-                            style={{width: 240}}
-                            label={buttonText}
-                            onClick={()=>user.currentAccount ? dispatch(_disconnectWallet()) : dispatch(_connectWallet())}
-                            onMouseEnter={(e)=>setHoverState(true)}
-                            onMouseLeave={(e)=>setHoverState(false)}
-                        />
-                    </div>
+                    {!user.goRoulette ?
+                        <>
+                            <nav className={classes.links}>
+                                <Link href={'#collection'} mode={'secondary'}>Collection</Link>
+                                <Link href={'#story'} mode={'secondary'}>Story</Link>
+                                <Link href={'#projects'} mode={'secondary'}>Projects</Link>
+                            </nav>
+                            <div className={classes.forUser}>
+                                <Socials/>
+                                <Button
+                                    style={{width: 240}}
+                                    label={buttonText}
+                                    onClick={()=>user.currentAccount ? dispatch(_disconnectWallet()) : dispatch(_connectWallet())}
+                                    onMouseEnter={(e)=>setHoverState(true)}
+                                    onMouseLeave={(e)=>setHoverState(false)}
+                                />
+                            </div>
+                        </>:
+                        <div className={classes.address}>
+                            {user.currentAccount.slice(0, 5) + '...' + user.currentAccount.slice(-5)}
+                        </div>
+                    }
                 </div>
             </header>
         </>

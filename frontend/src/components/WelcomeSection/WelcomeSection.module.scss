@@ -3,21 +3,63 @@
 .section{
   margin-top: 160px;
   margin-bottom: 240px;
+  @media (max-height: 1060px) {
+    margin-top: 40px;
+    margin-bottom: 160px;
+  }
+  @media (max-width: 1345px) {
+    margin-bottom: 100px;
+  }
 }
 
 .container{
   @extend %container;
   @include flex(flex, row nowrap, space-between, start);
   position: relative;
+  @media (max-width: 1345px) {
+    flex-flow: column;
+  }
 }
 
 .content{
   margin-top: 20px;
+  @media (max-width: $tabletWidth) {
+    width: 100%;
+  }
 }
 
 .subTitle{
   color: $whisky-sour-600;
   margin-bottom: 24px;
+  @media (max-height: 1060px) {
+    margin-bottom: 16px;
+  }
+}
+
+h1{
+  @media (max-width: 1345px) {
+    font-size: 96px !important;
+    white-space: normal !important;
+  }
+  @media (max-width: 1060px) {
+    font-size: 72px !important;
+  }
+  @media (max-width: 835px) {
+    font-size: 52px !important;
+  }
+  @media (max-width: 640px) {
+    font-size: 38px !important;
+    margin-left: 0 !important;
+  }
+}
+
+h4{
+  @media (max-width: 835px) {
+    font-size: 32px !important;
+  }
+  @media (max-width: 640px) {
+    font-size: 20px !important;
+  }
 }
 
 .activeText{

@@ -1,59 +1,108 @@
 import React, {useRef} from 'react';
 import classes from './CarouselSection.module.scss';
 import Carousel from '../Carousel/Carousel';
+import {useMatchMedia} from '../../hooks/useMatchMedia';
+import CarouselMobile from '../CarouselMobile/CarouselMobile';
 
 const itemForCarousel = [
     {
         id: 0,
-        url: 'https://bafybeie562kbomuteitcznj6dqxdud4xe2tmwbymysfh3tfw2ozyiq6s3m.ipfs.nftstorage.link/',
+        url: './img/nft/1.png',
     },
     {
         id: 1,
-        url: 'https://bafybeieiqsuu2hovs2zvfdjmluu53vvthzdthznqvch3oo4lxwnp5y4x2y.ipfs.nftstorage.link/',
+        url: './img/nft/2.png',
     },
     {
         id: 2,
-        url: 'https://bafybeie562kbomuteitcznj6dqxdud4xe2tmwbymysfh3tfw2ozyiq6s3m.ipfs.nftstorage.link/',
+        url: './img/nft/3.png',
     },
     {
         id: 3,
-        url: 'https://bafybeieiqsuu2hovs2zvfdjmluu53vvthzdthznqvch3oo4lxwnp5y4x2y.ipfs.nftstorage.link/',
+        url: './img/nft/4.png',
     },
     {
         id: 4,
-        url: 'https://bafybeie562kbomuteitcznj6dqxdud4xe2tmwbymysfh3tfw2ozyiq6s3m.ipfs.nftstorage.link/',
+        url: './img/nft/5.png',
     },
     {
         id: 5,
-        url: 'https://bafybeieiqsuu2hovs2zvfdjmluu53vvthzdthznqvch3oo4lxwnp5y4x2y.ipfs.nftstorage.link/',
+        url: './img/nft/6.png',
     },
     {
         id: 6,
-        url: 'https://bafybeie562kbomuteitcznj6dqxdud4xe2tmwbymysfh3tfw2ozyiq6s3m.ipfs.nftstorage.link/',
+        url: './img/nft/7.png',
     },
     {
         id: 7,
-        url: 'https://bafybeieiqsuu2hovs2zvfdjmluu53vvthzdthznqvch3oo4lxwnp5y4x2y.ipfs.nftstorage.link/',
+        url: './img/nft/8.png',
     },
     {
         id: 8,
-        url: 'https://bafybeie562kbomuteitcznj6dqxdud4xe2tmwbymysfh3tfw2ozyiq6s3m.ipfs.nftstorage.link/',
+        url: './img/nft/9.png',
     },
     {
         id: 9,
-        url: 'https://bafybeieiqsuu2hovs2zvfdjmluu53vvthzdthznqvch3oo4lxwnp5y4x2y.ipfs.nftstorage.link/',
+        url: './img/nft/10.png',
+    },
+    {
+        id: 10,
+        url: './img/nft/11.png',
+    },
+    {
+        id: 11,
+        url: './img/nft/12.png',
+    },
+    {
+        id: 12,
+        url: './img/nft/13.png',
+    },
+    {
+        id: 13,
+        url: './img/nft/14.png',
+    },
+    {
+        id: 14,
+        url: './img/nft/15.png',
+    },
+    {
+        id: 15,
+        url: './img/nft/16.png',
+    },
+    {
+        id: 16,
+        url: './img/nft/17.png',
+    },
+    {
+        id: 17,
+        url: './img/nft/18.png',
+    },
+    {
+        id: 18,
+        url: './img/nft/19.png',
+    },
+    {
+        id: 19,
+        url: './img/nft/20.png',
     },
 ];
 
 const CarouselSection = () => {
     const scope = useRef<HTMLDivElement>(null)
+    const {isTablet, isMobile} = useMatchMedia()
     return (
         <section id={'collection'} ref={scope} className={classes.section}>
-            <Carousel items={itemForCarousel} scope={scope} direction={'left'}/>
+            {!isMobile ?
+                <Carousel items={itemForCarousel.slice(0, 10)} scope={scope} direction={'left'} itemSize={isMobile ? 135 : isTablet ? 330 : 400}/>:
+                <CarouselMobile items={itemForCarousel.slice(0, 10)} direction={'left'} itemSize={isMobile ? 135 : isTablet ? 330 : 400}/>
+            }
             <div className={classes.container}>
                 <h3 className={classes.text}>We introduce baton to share <br/> our agency spirit</h3>
             </div>
-            <Carousel items={itemForCarousel} scope={scope} direction={'right'}/>
+            {!isMobile ?
+                <Carousel items={itemForCarousel.slice(10, 20)} scope={scope} direction={'right'} itemSize={isMobile ? 135 : isTablet ? 330 : 400}/>:
+                <CarouselMobile items={itemForCarousel.slice(10, 20)} direction={'right'} itemSize={isMobile ? 135 : isTablet ? 330 : 400}/>
+            }
         </section>
     );
 };

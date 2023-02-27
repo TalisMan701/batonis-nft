@@ -12,6 +12,10 @@
   padding: 16px;
   opacity: 0;
   pointer-events: none;
+  @media (max-width: 600px) {
+    padding: 0;
+    transform: translateX(-100%);
+  }
 }
 
 .modalContent{
@@ -19,13 +23,35 @@
   background-color: $white-1000;
   border-radius: 32px;
   position: relative;
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    @include flex(flex, column, center, center);
+  }
+}
+
+.btnClose{
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  @media (max-width: 600px) {
+    top: 32px;
+    right: 32px;
+  }
 }
 
 .modalEnterDone{
   opacity: 1;
   pointer-events: auto;
+  @media (max-width: 600px) {
+    transform: translateX(0);
+  }
 }
 
 .modalExit{
   opacity: 0;
+  @media (max-width: 600px) {
+    transform: translateX(-100%);
+  }
 }

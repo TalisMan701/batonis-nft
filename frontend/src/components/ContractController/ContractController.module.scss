@@ -1,0 +1,12 @@
+@import "../../styles/extendstyle";
+
+.wrapper{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  min-width: 300px;
+  height: 400px;
+  padding: 16px;
+  background-color: $black-900;
+  color: $white-1000;
+}

@@ -9,7 +9,7 @@ interface InfinityTextProps{
 const InfinityText: FC<InfinityTextProps> = ({children}) => {
     return (
         <div className={classes.wrapper}>
-            <Marquee className={classes.line} gradient={false}>
+            <Marquee className={classes.line} gradient={false} speed={200}>
                 {children}
             </Marquee>
         </div>

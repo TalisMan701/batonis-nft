@@ -1,20 +1,35 @@
 %container{
   width: 100%;
   max-width: $width-container-l;
-  padding: 0 16px;
+  padding: 0 120px;
   margin: 0 auto;
+  @media (max-width: $desktopWidth) {
+    padding: 0 80px;
+  }
+  @media (max-width: $tabletWidth) {
+    padding: 0 32px;
+  }
+  @media (max-width: $mobileWidth) {
+    padding: 0 16px;
+  }
 }
 
 %container-medium{
   width: 100%;
   max-width: $width-container-m;
-  padding: 0 16px;
+  padding: 0 32px;
   margin: 0 auto;
+  @media (max-width: $mobileWidth) {
+    padding: 0 16px;
+  }
 }
 
 %container-small{
   width: 100%;
   max-width: $width-container-s;
-  padding: 0 16px;
+  padding: 0 32px;
   margin: 0 auto;
+  @media (max-width: $mobileWidth) {
+    padding: 0 16px;
+  }
 }

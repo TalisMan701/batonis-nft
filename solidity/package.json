@@ -8,7 +8,8 @@
     "local_node": "npx hardhat node",
     "test": "npx hardhat test --network hardhat",
     "deploy": "npx hardhat run scripts/deploy_BatonisNFT.ts --network ",
-    "deploy_mumbai": "npx hardhat run scripts/deploy_BatonisNFT.ts --network polygonMumbai"
+    "deploy_mumbai": "npx hardhat run scripts/deploy_BatonisNFT.ts --network polygonMumbai",
+    "deploy_payment_mumbai": "npx hardhat run scripts/deploy_BatonisToken.ts --network polygonMumbai"
   },
   "author": "",
   "license": "ISC",

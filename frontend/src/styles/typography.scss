@@ -8,11 +8,17 @@
 
 %h1{
   @include font("Righteous-Regular", 96px, 125%, 400);
+  @media (max-width: 1700px) {
+    @include font("Righteous-Regular", 72px, 120%, 400);
+  }
 }
 
 %h1-u{
   @include font("Righteous-Regular", 96px, 125%, 400);
   text-transform: uppercase;
+  @media (max-width: 1700px) {
+    @include font("Righteous-Regular", 72px, 120%, 400);
+  }
 }
 
 %h2{

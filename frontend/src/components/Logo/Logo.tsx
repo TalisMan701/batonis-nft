@@ -1,5 +1,8 @@
 import React, {CSSProperties, FC} from 'react';
 import classes from './Logo.module.scss';
+import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
+import {userSlice} from '../../store/reducers/UserReducer/UserSlice';
+import Link from '../UiKit/Link/Link';
 
 interface LogoProps {
     label: string,
@@ -7,10 +10,16 @@ interface LogoProps {
 }
 
 const Logo: FC<LogoProps> = ({label, style}) => {
+    const dispatch = useAppDispatch();
+    const {iHaveDrop, goRoulette} = useAppSelector(state => state.user)
     return (
-        <div className={classes.logo} style={{...style}}>
+        <Link mode={'secondary'} href={'#'} onClick={()=>{
+            if(iHaveDrop && goRoulette){
+                dispatch(userSlice.actions.clickLogo())
+            }
+        }} className={classes.logo} style={{...style}} disable={!iHaveDrop && goRoulette}>
             {label}
-        </div>
+        </Link>
     );
 };
 
