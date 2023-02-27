@@ -2,7 +2,7 @@ version: '3.2'
 
 
 services:
-  nginx:
+  nftnginx:
     build:
       context: .
       dockerfile: ./frontend/Dockerfile
@@ -12,8 +12,7 @@ services:
     volumes:
       - ./nginx/:/etc/nginx/conf.d
     ports:
-      - "80:80"
-      - "443:443"
+      - "80"
     networks:
       - demo_nft_network
   
