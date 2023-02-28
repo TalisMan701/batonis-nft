@@ -17,7 +17,7 @@ const Socials: FC<SocialsProps> = ({style}) => {
             <Button type={'link'} href={'https://t.me/Danirill'} target={'_blank'} icon={<img draggable={false} src={telegramSVG} alt="telegram"/>} iconDirection={'left'} color={'secondary'}/>
             <Button type={'link'} href={'https://www.linkedin.com/company/batonis/'} target={'_blank'} icon={<img draggable={false} src={linkedinSVG} alt="linkedin"/>} iconDirection={'left'} color={'secondary'}/>
             <Button type={'link'} href={'https://github.com/Batonis-Tech/Batonis-Open-Projects'} target={'_blank'} icon={<img draggable={false} src={githubSVG} alt="github"/>} iconDirection={'left'} color={'secondary'}/>
-            <Button type={'link'} href={'https://testnets.opensea.io/collection/batonisnft-1'} target={'_blank'} icon={<img draggable={false} src={openSeaSVG} alt="telegram"/>} iconDirection={'left'} color={'secondary'}/>
+            <Button type={'link'} href={'https://testnets.opensea.io/collection/batonisnft-2'} target={'_blank'} icon={<img draggable={false} src={openSeaSVG} alt="telegram"/>} iconDirection={'left'} color={'secondary'}/>
         </div>
     );
 };

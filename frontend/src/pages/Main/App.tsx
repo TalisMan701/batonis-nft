@@ -13,7 +13,7 @@ import ModalMint from '../../components/ModalMint/ModalMint';
 import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
 import {modalsSlice} from '../../store/reducers/ModalsReducer/ModalsSlice';
 import {_eventOnChangeChain, _eventOnChangeWallet} from '../../store/reducers/UserReducer/UserActionCreators';
-import {changeChainId, worknet} from '../../api/web3';
+import {changeChainId, loadNFTImage, worknet} from '../../api/web3';
 import ToastWrapper from '../../components/Toast/ToastWrapper';
 import {toastsSlice} from '../../store/reducers/ToastsReducer/ToastsSlice';
 import Roulette from '../../components/Roulette/Roulette';

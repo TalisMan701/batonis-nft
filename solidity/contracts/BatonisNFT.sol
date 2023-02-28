@@ -25,7 +25,7 @@ contract BatonisNFT is ERC721Enumerable, Ownable {
 
     IERC20 public paymentToken;
 
-    uint256 public maxElements = 120;
+    uint256 public maxElements = 20;
 
     // Signature check
     modifier onlySigned(bytes memory signature) {
@@ -51,17 +51,13 @@ contract BatonisNFT is ERC721Enumerable, Ownable {
 
     // Mint
     function mint(bytes memory signature) public onlySigned(signature){
-        uint256 count = 1;
-        uint256 amountToPay = price * count;
-        uint256 supply = totalSupply();
-
         require(tx.origin == msg.sender,        "Not allowed");
         require(saleState == true,              "Sale not live");
-        require(supply + count <= maxElements, "Exceeds maximum mint supply");
+        require(totalSupply() + 1 <= maxElements, "Exceeds maximum mint supply");
         require(tx.gasprice <= gasPriceLimit,   "Gas price error");
 
-        require(paymentToken.allowance(msg.sender, address(this)) >= amountToPay, "Approve contract for spending your funds");
-        require(paymentToken.transferFrom(msg.sender, address(this), amountToPay), "Insufficient funds");
+        require(paymentToken.allowance(msg.sender, address(this)) >= price, "Approve contract for spending your funds");
+        require(paymentToken.transferFrom(msg.sender, address(this), price), "Insufficient funds");
 
         _mintOne(msg.sender);
     }

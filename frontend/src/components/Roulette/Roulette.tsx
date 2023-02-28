@@ -240,7 +240,7 @@ const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
                         <RouletteItem key={`${item.id}` + generateUEID()} item={{...item, size: sizeItems, margin: marginItem}}/>
                     ))}
                     {properties &&
-                        <img draggable={false} className={classNamesDrop} src={properties.result.img} alt="Your NFT" style={{minWidth: sizeItems, height: sizeItems, margin: `0 ${marginItem}px`}}/>
+                        <img draggable={false} className={classNamesDrop} src={properties.result.img || items[properties.result.id].img} alt="Your NFT" style={{minWidth: sizeItems, height: sizeItems, margin: `0 ${marginItem}px`}}/>
                     }
                     {!iHaveDrop &&properties?.itemsAfter.map((item) => (
                         <RouletteItem key={`${item.id}` + generateUEID()} item={{...item, size: sizeItems, margin: marginItem}}/>

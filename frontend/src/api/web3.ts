@@ -283,12 +283,14 @@ export async function loadNFTImage(tokenId: string | number) {
     const url = await tokenURI(tokenId);
     console.log(url)
     const response = await fetch(_ipfsToUrl(url), {
+        method: 'GET',
         headers: {
-            accept: 'application/json'
+            accept: 'application/json',
         }
     });
-
     const metadata = await response.json();
+
+    console.log(metadata)
 
     return _ipfsToUrl(metadata.image);
 }

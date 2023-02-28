@@ -80,6 +80,7 @@ export const _mint = (currentAccount: string) => async (dispatch: AppDispatch) =
             dispatch(userSlice.actions.setMintStage({stage: 'Approve token for contract', progress: 20}))
             const _allowance = await approveHandler()
             if(_allowance < price) {
+                dispatch(toastsSlice.actions.show('Allowance < price mint. Please approve tokens'))
                 dispatch(userSlice.actions.breakingMint())
                 return
             }
@@ -92,22 +93,23 @@ export const _mint = (currentAccount: string) => async (dispatch: AppDispatch) =
             console.log('Minting', tx.hash);
             dispatch(userSlice.actions.setMintStage({stage: 'Minting NFT', progress: 65}))
             tx = await tx.wait();
+            let tokenId = -1;
             try {
                 dispatch(userSlice.actions.setMintStage({stage: 'Get image', progress: 80}))
-                const tokenId = getTokenId(tx);
-                // todo починить функцию loadNFTImage ( там _ipfsToUrl получается baseURI Без слеша в конце, т.е. норм ссылку закинуть в baseURI. И в принципе залить в ipfs хранилище картинки и нормик будет)
+                tokenId = getTokenId(tx);
                 const imageUrl = await loadNFTImage(tokenId);
                 dispatch(userSlice.actions.setMintStage({stage: 'Get image', progress: 100}))
-                console.log(imageUrl)
-                dispatch(userSlice.actions.onRoulette({id: tokenId ?? 1, img: imageUrl ?? 'https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg', cid: 'temp', rarity: 'common'}))
+                dispatch(userSlice.actions.onRoulette({id: tokenId-1 || 1, img: imageUrl ?? '', cid: 'temp', rarity: 'common'}))
             } catch (err: any){
+                dispatch(toastsSlice.actions.show('Failed to get image...'))
                 console.error('Get token ID with tx', err)
-                // todo показать заглушка по типу с вопросительным знаком потому что не удалось получить картинку
+                dispatch(userSlice.actions.setMintStage({stage: 'Get image', progress: 100}))
+                dispatch(userSlice.actions.onRoulette({id: tokenId-1 || 1, img: '', cid: 'temp', rarity: 'common'}))
             }
         }catch (err: any){
             const error = (err.error && err.error.data && err.error.data.originalError) || err;
             const message = (error.message || err.message).replace('execution reverted: ', '');
-
+            dispatch(toastsSlice.actions.show(message))
             console.error(`TX failed: ${ message }`);
             dispatch(userSlice.actions.breakingMint())
         }
