@@ -58,16 +58,24 @@ const Header = () => {
                                         <nav className={classes.links}>
                                             <Link href={'#collection'} mode={'secondary'}>Collection</Link>
                                             <Link href={'#story'} mode={'secondary'}>Story</Link>
-                                            <Link href={'#projects'} mode={'secondary'}>Projects</Link>
+                                            <Link href={'#projects'} mode={'secondary'}>Contacts</Link>
                                         </nav>
                                         <Socials/>
-                                        <Button
-                                            style={{width: '100%', marginTop: 24}}
-                                            label={buttonText}
-                                            onClick={()=>user.currentAccount ? dispatch(_disconnectWallet()) : dispatch(_connectWallet())}
-                                            onMouseEnter={(e)=>setHoverState(true)}
-                                            onMouseLeave={(e)=>setHoverState(false)}
-                                        />
+                                        {user.currentAccount ?
+                                            <div className={classes.account} style={{marginTop: 32}}>
+                                                <div className={classes.address}>
+                                                    {user.currentAccount.slice(0, 5) + '...' + user.currentAccount.slice(-5)}
+                                                </div>
+                                                <div className={classes.btnDisconnect} onClick={()=>{dispatch(_disconnectWallet())}}>Disconnect</div>
+                                            </div> :
+                                            <Button
+                                                style={{width: '100%', marginTop: 24}}
+                                                label={buttonText}
+                                                onClick={() => dispatch(_connectWallet())}
+                                                onMouseEnter={(e) => setHoverState(true)}
+                                                onMouseLeave={(e) => setHoverState(false)}
+                                            />
+                                        }
                                     </div>
                                 </CSSTransition>
                             </>:
@@ -95,13 +103,20 @@ const Header = () => {
                             </nav>
                             <div className={classes.forUser}>
                                 <Socials/>
-                                <Button
-                                    style={{width: 240}}
-                                    label={buttonText}
-                                    onClick={()=>user.currentAccount ? dispatch(_disconnectWallet()) : dispatch(_connectWallet())}
-                                    onMouseEnter={(e)=>setHoverState(true)}
-                                    onMouseLeave={(e)=>setHoverState(false)}
-                                />
+                                {user.currentAccount ?
+                                    <div className={classes.account}>
+                                        <div className={classes.address}>
+                                            {user.currentAccount.slice(0, 5) + '...' + user.currentAccount.slice(-5)}
+                                        </div>
+                                        <div className={classes.btnDisconnect} onClick={()=>{dispatch(_disconnectWallet())}}>Disconnect</div>
+                                    </div> :
+                                    <Button
+                                        label={buttonText}
+                                        onClick={() => dispatch(_connectWallet())}
+                                        onMouseEnter={(e) => setHoverState(true)}
+                                        onMouseLeave={(e) => setHoverState(false)}
+                                    />
+                                }
                             </div>
                         </>:
                         <div className={classes.address}>

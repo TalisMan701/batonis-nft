@@ -13,6 +13,7 @@
   color: $white-1000;
   user-select: none;
   transition: all 0.2s ease-in-out;
+  text-decoration: none;
   &.btnL{
     @extend %btn-l;
     padding: 29px 44px;

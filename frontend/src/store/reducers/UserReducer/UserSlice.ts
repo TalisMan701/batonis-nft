@@ -12,6 +12,7 @@ interface UserState {
     myDrop: INFTData | null
     fetchMint: boolean
     mintStage: string
+    progressMinting: number | null
 }
 
 const initialState: UserState = {
@@ -23,7 +24,8 @@ const initialState: UserState = {
     iHaveDrop: false,
     myDrop: null,
     fetchMint: false,
-    mintStage: ''
+    mintStage: '',
+    progressMinting: null
 }
 
 export const userSlice = createSlice({
@@ -59,6 +61,7 @@ export const userSlice = createSlice({
             state.myDrop = null
             state.mintStage = ''
             state.isLoading = true
+            state.progressMinting = null
         },
         setFetchBuildRoulette(state, action: PayloadAction<boolean>){
             state.fetchBuildRoulette = action.payload
@@ -69,8 +72,12 @@ export const userSlice = createSlice({
         setFetchMint(state, action: PayloadAction<boolean>){
             state.fetchMint = action.payload
         },
-        setMintStage(state, action: PayloadAction<string>){
-            state.mintStage = action.payload
+        setMintStage(state, action: PayloadAction<{stage: string, progress: number}>){
+            state.mintStage = action.payload.stage
+            state.progressMinting = action.payload.progress
+        },
+        setProgressMinting(state, action: PayloadAction<number | null>){
+            state.progressMinting = action.payload
         }
     }
 })

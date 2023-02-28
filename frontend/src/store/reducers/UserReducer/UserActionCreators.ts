@@ -54,21 +54,21 @@ export const _eventOnChangeChain = () => async (dispatch: AppDispatch) => {
 export const _mint = (currentAccount: string) => async (dispatch: AppDispatch) => {
     if(ethereum){
         dispatch(userSlice.actions.setFetchMint(true))
-        dispatch(userSlice.actions.setMintStage('Get price mint NFT'))
+        dispatch(userSlice.actions.setMintStage({stage: 'Get price mint NFT', progress: 0}))
         const price = await getPrice()
-        dispatch(userSlice.actions.setMintStage('Get allowance token for contract'))
+        dispatch(userSlice.actions.setMintStage({stage: 'Get allowance token for contract', progress: 10}))
         const allowance = await getPaymentAllowance(currentAccount)
         const approveHandler = async () => {
             let tx: any;
             try {
-                dispatch(userSlice.actions.setMintStage('Approve token for contract'))
+                dispatch(userSlice.actions.setMintStage({stage: 'Approve token for contract', progress: 30}))
                 tx = await approvePaymentToken(price)
             } catch (err: any){
                 console.error(err.message);
             }
             try {
                 await tx.wait()
-                dispatch(userSlice.actions.setMintStage('Get allowance token for contract'))
+                dispatch(userSlice.actions.setMintStage({stage: 'Get allowance token for contract', progress: 40}))
                 return await getPaymentAllowance(currentAccount)
             } catch (err: any){
                 console.error(err.message);
@@ -77,6 +77,7 @@ export const _mint = (currentAccount: string) => async (dispatch: AppDispatch) =
         }
         if(allowance < price){
             console.log('Approve');
+            dispatch(userSlice.actions.setMintStage({stage: 'Approve token for contract', progress: 20}))
             const _allowance = await approveHandler()
             if(_allowance < price) {
                 dispatch(userSlice.actions.breakingMint())
@@ -86,15 +87,17 @@ export const _mint = (currentAccount: string) => async (dispatch: AppDispatch) =
         console.log('Approve completed');
         try {
             console.log('Before minting');
-            dispatch(userSlice.actions.setMintStage('Minting NFT'))
+            dispatch(userSlice.actions.setMintStage({stage: 'Minting NFT', progress: 50}))
             let tx = await buyProcess(currentAccount, price)
             console.log('Minting', tx.hash);
+            dispatch(userSlice.actions.setMintStage({stage: 'Minting NFT', progress: 65}))
             tx = await tx.wait();
             try {
-                dispatch(userSlice.actions.setMintStage('Get image'))
+                dispatch(userSlice.actions.setMintStage({stage: 'Get image', progress: 80}))
                 const tokenId = getTokenId(tx);
                 // todo починить функцию loadNFTImage ( там _ipfsToUrl получается baseURI Без слеша в конце, т.е. норм ссылку закинуть в baseURI. И в принципе залить в ipfs хранилище картинки и нормик будет)
                 const imageUrl = await loadNFTImage(tokenId);
+                dispatch(userSlice.actions.setMintStage({stage: 'Get image', progress: 100}))
                 console.log(imageUrl)
                 dispatch(userSlice.actions.onRoulette({id: tokenId ?? 1, img: imageUrl ?? 'https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg', cid: 'temp', rarity: 'common'}))
             } catch (err: any){

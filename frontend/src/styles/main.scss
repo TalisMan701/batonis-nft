@@ -4,6 +4,7 @@
 
 html{
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 *{
@@ -13,7 +14,6 @@ html{
 body{
   background-color: $whisky-sour-200;
   color: $black-900;
-  overflow-x: hidden;
 }
 
 h1,h2,h3,h4,h5,h6{

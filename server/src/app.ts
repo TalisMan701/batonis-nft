@@ -49,7 +49,7 @@ const logger = new Logger('nft-back');
         next()
     })
 
-    app.use(mainRouter)
+    app.use(env.LINK_NGINX, mainRouter)
 
     app.use(errorMiddleware)
 

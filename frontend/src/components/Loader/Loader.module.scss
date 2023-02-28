@@ -24,14 +24,17 @@
   height: 800px;
   border-radius: 999px;
   background-color: transparent;
-  box-shadow: inset 0px 0px 0px 0px $whisky-sour-200;
   bottom: -434px;
   left: -303px;
   animation: 2s circle ease-in-out;
+  transition: all 1s ease-in-out;
   &.infinity{
     animation-iteration-count: infinite;
     animation-name: circleBoth;
     animation-duration: 3s;
+  }
+  &.animationNone{
+    animation: none;
   }
   &[playanimation='running']{
     animation-play-state: running;

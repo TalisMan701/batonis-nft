@@ -33,7 +33,7 @@ const Carousel: FC<ICarouselProps> = ({items, direction= 'left', scope, itemSize
             gsap.to(target.current, {
                 scrollTrigger: {
                     trigger: target.current,
-                    scrub: 0.5,
+                    scrub: 2,
                     start: 'top 85%',
                     end: 'bottom 15%',
                     markers: false

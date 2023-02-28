@@ -174,7 +174,7 @@ const chancedRandom = (chances: Chances) => {
 };
 
 const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
-    const {iHaveDrop, currentAccount, fetchMint, fetchBuildRoulette, myDrop, mintStage} = useAppSelector(state => state.user)
+    const {iHaveDrop, currentAccount, fetchMint, fetchBuildRoulette, myDrop, mintStage, progressMinting} = useAppSelector(state => state.user)
     const dispatch = useAppDispatch()
     const [properties, setProperties] = useState<{
         result: INFTData;
@@ -224,7 +224,7 @@ const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
     const classNamesDrop = `${classes.img} ${iHaveDrop ? classes.drop: ''}`;
     const classNamesItems = `${classes.items} ${iHaveDrop ? classes.itemsForDrop: ''}`;
 
-    if(fetchMint || fetchBuildRoulette) return <Loading stage={mintStage} infinity={true}/>
+    if(fetchMint || fetchBuildRoulette) return <Loading stage={mintStage} infinity={true} animation={false} progress={progressMinting}/>
 
     return (
         <div className={classes.container}>

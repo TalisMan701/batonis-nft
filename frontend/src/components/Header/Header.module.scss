@@ -81,6 +81,21 @@
   opacity: 0;
 }
 
+.account{
+
+}
+
+.btnDisconnect{
+  cursor: pointer;
+  @extend %b-24;
+  color: $blackthorn-600;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    color: $blackthorn-800;
+  }
+}
+
 .address{
   @extend %b-24;
   color: $black-900;
