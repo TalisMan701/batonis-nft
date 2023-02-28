@@ -1,11 +1,6 @@
 import React from 'react';
 import classes from './AboutMintSection.module.scss';
-import Button from '../UiKit/Button/Button';
 import CountMinted from '../CountMinted/CountMinted';
-import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
-import {modalsSlice} from '../../store/reducers/ModalsReducer/ModalsSlice';
-import {useMatchMedia} from '../../hooks/useMatchMedia';
-import {userSlice} from '../../store/reducers/UserReducer/UserSlice';
 import MintButton from '../MintButton/MintButton';
 
 const AboutMintSection = () => {

@@ -8,32 +8,26 @@ import AboutMintSection from '../../components/AboutMintSection/AboutMintSection
 import Footer from '../../components/Footer/Footer';
 import InfinityText from '../../components/InfinityText/InfinityText';
 import ReactPortal from '../../components/ReactPortal/ReactPortal';
-import ModalConnectWallet from '../../components/ModalConnectWallet/ModalConnectWallet';
-import ModalMint from '../../components/ModalMint/ModalMint';
 import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
-import {modalsSlice} from '../../store/reducers/ModalsReducer/ModalsSlice';
 import {
     _eventOnChangeChain,
     _eventOnChangeWallet,
 } from '../../store/reducers/UserReducer/UserActionCreators';
-import {changeChainId, loadNFTImage, worknet} from '../../api/web3';
+import {changeChainId, worknet} from '../../api/web3';
 import ToastWrapper from '../../components/Toast/ToastWrapper';
 import {toastsSlice} from '../../store/reducers/ToastsReducer/ToastsSlice';
 import Roulette from '../../components/Roulette/Roulette';
-import ItemDrop from '../../components/ItemDrop/ItemDrop';
 import {useMatchMedia} from '../../hooks/useMatchMedia';
 import Loading from '../Loading/Loading';
 import {userSlice} from '../../store/reducers/UserReducer/UserSlice';
-import ContractController from '../../components/ContractController/ContractController';
 import Button from '../../components/UiKit/Button/Button';
 
 const App = () => {
-    const {connectWalletModalIsOpen, mintModalIsOpen} = useAppSelector((state) => state.modals);
-    const {isRightChainId, isLoading, goRoulette, iHaveDrop, currentAccount} = useAppSelector(
+    const {isRightChainId, isLoading, goRoulette, currentAccount} = useAppSelector(
         (state) => state.user,
     );
     const dispatch = useAppDispatch();
-    const {isMobile, isTablet, isDesktop, isDesktopXL} = useMatchMedia();
+    const {isMobile, isTablet} = useMatchMedia();
     useEffect(() => {
         dispatch(_eventOnChangeWallet());
         dispatch(_eventOnChangeChain());
