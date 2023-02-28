@@ -166,7 +166,7 @@ function AppOld() {
                     );
                 })}
             </div>
-            <CursorTestGSAP/>
+            <CursorTestGSAP />
         </div>
     );
 }

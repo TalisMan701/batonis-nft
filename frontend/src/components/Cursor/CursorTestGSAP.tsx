@@ -45,7 +45,7 @@ const CursorTestGSAP = () => {
 
                 const rotation = Math.atan2(dy, dx) + Math.PI / 2;
                 rotate.current = rotation;
-                if(pointer.current){
+                if (pointer.current) {
                     gsap.set(pointer.current, {rotation: rotation + '_rad'});
                 }
             });

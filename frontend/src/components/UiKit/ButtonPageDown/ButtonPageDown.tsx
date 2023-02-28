@@ -1,5 +1,5 @@
 import React, {CSSProperties, FC} from 'react';
-import classes from './ButtonPageDown.module.scss'
+import classes from './ButtonPageDown.module.scss';
 
 interface IButtonPageDownProps {
     label?: string;

@@ -6,23 +6,32 @@ import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
 import {_connectWallet} from '../../store/reducers/UserReducer/UserActionCreators';
 
 interface IModalConnectWalletProps {
-    isOpen: boolean,
-    handleClose: () => void
+    isOpen: boolean;
+    handleClose: () => void;
 }
 
 const ModalConnectWallet: FC<IModalConnectWalletProps> = ({isOpen, handleClose}) => {
-    const user = useAppSelector(state => state.user);
-    const dispatch = useAppDispatch()
-    useEffect(()=>{
-        if(user.currentAccount){
-            handleClose()
+    const user = useAppSelector((state) => state.user);
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        if (user.currentAccount) {
+            handleClose();
         }
-    },[user.currentAccount])
+    }, [user.currentAccount]);
     return (
         <Modal isOpen={isOpen} handleClose={handleClose}>
-            <Button icon={<MetamaskSVG/>} label={'Connect Metamask'} iconDirection={'left'} color={'secondary'} onClick={()=>dispatch(_connectWallet())}/>
+            <Button
+                icon={<MetamaskSVG />}
+                label={'Connect Metamask'}
+                iconDirection={'left'}
+                color={'secondary'}
+                onClick={() => dispatch(_connectWallet())}
+            />
         </Modal>
     );
 };
 
-export default React.memo(ModalConnectWallet, (prevProps, nextProps) => prevProps.isOpen === nextProps.isOpen);
+export default React.memo(
+    ModalConnectWallet,
+    (prevProps, nextProps) => prevProps.isOpen === nextProps.isOpen,
+);

@@ -1,5 +1,5 @@
-import {ContractInterface, ethers} from 'ethers';
-import { mainnet, testnet } from './const';
+import {ethers} from 'ethers';
+import {mainnet, testnet} from './const';
 import {getSignature} from './api';
 import walletEncoder from '../utils/encoder';
 
@@ -10,7 +10,7 @@ let contractInstance: ethers.Contract | null | undefined;
 let paymentContract: ethers.Contract | null | undefined;
 
 export function getProvider() {
-    const { ethereum } = window;
+    const {ethereum} = window;
 
     if (!providerInstance) {
         providerInstance = new ethers.providers.Web3Provider(ethereum);
@@ -23,7 +23,11 @@ export function getContract() {
     const provider = getProvider();
 
     if (!contractInstance) {
-        contractInstance = new ethers.Contract(worknet.saleAddress, worknet.saleAbi, provider.getSigner());
+        contractInstance = new ethers.Contract(
+            worknet.saleAddress,
+            worknet.saleAbi,
+            provider.getSigner(),
+        );
     }
 
     return contractInstance;
@@ -33,31 +37,34 @@ export function getPaymentContract() {
     const provider = getProvider();
 
     if (!paymentContract) {
-        paymentContract = new ethers.Contract(worknet.paymentAddress, worknet.paymentAbi, provider.getSigner());
+        paymentContract = new ethers.Contract(
+            worknet.paymentAddress,
+            worknet.paymentAbi,
+            provider.getSigner(),
+        );
     }
 
     return paymentContract;
 }
 
 export async function checkWalletIsConnected() {
-    const { ethereum } = window;
+    const {ethereum} = window;
 
     try {
         if (!ethereum) {
             throw new Error('Make sure you have Metamask installed!');
         }
 
-        const accounts = await ethereum.request({ method: 'eth_accounts' });
+        const accounts = await ethereum.request({method: 'eth_accounts'});
 
         if (!accounts.length) {
             throw new Error('No authorized account found');
         }
 
         return accounts[0];
-    }
-    catch (err) {
-        let message = 'Unknown Error'
-        if (err instanceof Error) message = err.message
+    } catch (err) {
+        let message = 'Unknown Error';
+        if (err instanceof Error) message = err.message;
         console.log(message);
 
         return false;
@@ -65,17 +72,16 @@ export async function checkWalletIsConnected() {
 }
 
 export async function connectWallet() {
-    const { ethereum } = window;
+    const {ethereum} = window;
 
     try {
         if (!ethereum) {
             throw new Error('No Metamask installed');
         }
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await ethereum.request({method: 'eth_requestAccounts'});
 
         return accounts[0];
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Connect wallet error: ', err);
 
         return null;
@@ -83,7 +89,7 @@ export async function connectWallet() {
 }
 
 export async function disconnectWallet() {
-    const { ethereum } = window;
+    const {ethereum} = window;
 
     try {
         if (!ethereum) {
@@ -93,12 +99,11 @@ export async function disconnectWallet() {
         await ethereum.request({
             method: 'eth_requestAccounts',
             // eslint-disable-next-line camelcase
-            params: [{ eth_accounts: {} }]
+            params: [{eth_accounts: {}}],
         });
 
         return true;
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Disconnect wallet error: ', err);
 
         return false;
@@ -106,44 +111,45 @@ export async function disconnectWallet() {
 }
 
 export async function checkChainId(chainId?: string) {
-    const { ethereum } = window;
+    const {ethereum} = window;
 
     if (!ethereum) {
         return false;
     }
 
-    const userChainId   = parseInt(chainId || await ethereum.request({ method: 'eth_chainId' }));
-    const properChainId = parseInt(`${ worknet.workChainId }`);
+    const userChainId = parseInt(chainId || (await ethereum.request({method: 'eth_chainId'})));
+    const properChainId = parseInt(`${worknet.workChainId}`);
 
     return userChainId === properChainId;
 }
 
 export async function changeChainId(): Promise<boolean> {
-    const { ethereum } = window;
+    const {ethereum} = window;
 
     try {
         await ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{
-                chainId: ethers.utils.hexValue(worknet.workChainId)
-            }]
+            params: [
+                {
+                    chainId: ethers.utils.hexValue(worknet.workChainId),
+                },
+            ],
         });
-        return true
-    }
-    catch (err) {
+        return true;
+    } catch (err) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         if (err.code === 4902) {
             await addChainId();
             return changeChainId();
         }
-        return false
+        return false;
         console.error(err);
     }
 }
 
 export async function addChainId() {
-    const { ethereum } = window;
+    const {ethereum} = window;
 
     await ethereum.request({
         method: 'wallet_addEthereumChain',
@@ -154,12 +160,12 @@ export async function addChainId() {
                 nativeCurrency: {
                     name: worknet.coinName,
                     symbol: worknet.symbol,
-                    decimals: worknet.decimals
+                    decimals: worknet.decimals,
                 },
                 blockExplorerUrls: [worknet.explorerUrl],
                 rpcUrls: [worknet.rpcUrl],
-            }
-        ]
+            },
+        ],
     });
 }
 
@@ -186,7 +192,7 @@ export async function getFromContract(method: string, ...args: any) {
     const contract = getContract();
 
     if (typeof contract[method] !== 'function') {
-        console.warn(`Non exist method ${ method }`, contract);
+        console.warn(`Non exist method ${method}`, contract);
         return null;
     }
 
@@ -228,7 +234,7 @@ export async function buyProcess(userWallet: string, priceNFT: number) {
     const balance = await getPaymentBalance(userWallet);
 
     if (balance < priceNFT) {
-        throw new Error(`Not enough balance. Current balance: ${ balance }`);
+        throw new Error(`Not enough balance. Current balance: ${balance}`);
     }
 
     // Checks token allowance
@@ -239,7 +245,7 @@ export async function buyProcess(userWallet: string, priceNFT: number) {
     }
 
     // Checks sale state
-    if (!await saleIsOpen()) {
+    if (!(await saleIsOpen())) {
         throw new Error('Sale not active');
     }
 
@@ -248,8 +254,7 @@ export async function buyProcess(userWallet: string, priceNFT: number) {
 
     try {
         signature = await getSignature(walletEncoder(userWallet));
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Feiled to get signature, original error: ', err);
         throw new Error('Failed to get a signature');
     }
@@ -261,36 +266,37 @@ export async function buyProcess(userWallet: string, priceNFT: number) {
 export function parseLogs(logs = []) {
     const iface = new ethers.utils.Interface(worknet.saleAbi);
 
-    return logs.map((log) => {
-        try {
-            return iface.parseLog(log);
-        }
-        catch (err) {
-            return null;
-        }
-    }).filter(parsed => parsed);
+    return logs
+        .map((log) => {
+            try {
+                return iface.parseLog(log);
+            } catch (err) {
+                return null;
+            }
+        })
+        .filter((parsed) => parsed);
 }
 
 export function getTokenId(tx: any) {
     const log = parseLogs(tx.logs).find((log: any) => log.name === 'Transfer');
-    console.log(log)
+    console.log(log);
     const tokenId = log && log.args.tokenId;
 
-    return tokenId && tokenId.toString() || tokenId;
+    return (tokenId && tokenId.toString()) || tokenId;
 }
 
 export async function loadNFTImage(tokenId: string | number) {
     const url = await tokenURI(tokenId);
-    console.log(url)
+    console.log(url);
     const response = await fetch(_ipfsToUrl(url), {
         method: 'GET',
         headers: {
             accept: 'application/json',
-        }
+        },
     });
     const metadata = await response.json();
 
-    console.log(metadata)
+    console.log(metadata);
 
     return _ipfsToUrl(metadata.image);
 }

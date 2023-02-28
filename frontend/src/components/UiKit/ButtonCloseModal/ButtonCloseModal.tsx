@@ -9,10 +9,10 @@ interface IButtonCloseModalProps {
 }
 
 const ButtonCloseModal: FC<IButtonCloseModalProps> = ({onClick, style, className}) => {
-    const classNames = `${classes.btn} ${className}`
+    const classNames = `${classes.btn} ${className}`;
     return (
         <div onClick={onClick} className={classNames} style={{...style}}>
-            <CloseSVG/>
+            <CloseSVG />
         </div>
     );
 };

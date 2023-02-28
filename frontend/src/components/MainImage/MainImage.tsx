@@ -5,9 +5,9 @@ import mainImg from '../../assets/img/main-dog.png';
 const MainImage = () => {
     return (
         <div className={classes.container}>
-            <div className={classes.circle}/>
-            <img className={classes.img} src={mainImg} alt="corgi main"/>
-            <div className={classes.shadow}/>
+            <div className={classes.circle} />
+            <img className={classes.img} src={mainImg} alt='corgi main' />
+            <div className={classes.shadow} />
         </div>
     );
 };

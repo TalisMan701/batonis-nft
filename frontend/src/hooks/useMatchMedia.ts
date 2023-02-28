@@ -4,7 +4,7 @@ const queries = [
     '(max-width: 480px)',
     '(min-width: 481px) and (max-width: 1024px)',
     '(min-width: 1025px) and (max-width: 1440px)',
-    '(min-width: 1441px)'
+    '(min-width: 1441px)',
 ];
 
 export const useMatchMedia = () => {
@@ -23,5 +23,5 @@ export const useMatchMedia = () => {
     return ['isMobile', 'isTablet', 'isDesktop', 'isDesktopXL'].reduce(
         (acc, screen, index) => ({...acc, [screen]: values[index]}),
         {},
-    ) as {isMobile: boolean; isTablet: boolean; isDesktop: boolean, isDesktopXL: boolean};
+    ) as {isMobile: boolean; isTablet: boolean; isDesktop: boolean; isDesktopXL: boolean};
 };

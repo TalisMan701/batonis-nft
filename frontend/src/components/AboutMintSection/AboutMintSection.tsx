@@ -37,7 +37,7 @@ const AboutMintSection = () => {
                             <span className={classes.infoItemSubtitle}>per wallet</span>
                         </div>
                     </div>
-                    <MintButton/>
+                    <MintButton />
                 </div>
                 <CountMinted />
             </div>

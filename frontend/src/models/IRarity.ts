@@ -1,1 +1,1 @@
-export type IRarity = 'common' | 'rare' | 'ultraRare'
+export type IRarity = 'common' | 'rare' | 'ultraRare';

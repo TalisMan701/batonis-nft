@@ -88,21 +88,43 @@ const itemForCarousel = [
 ];
 
 const CarouselSection = () => {
-    const scope = useRef<HTMLDivElement>(null)
-    const {isTablet, isMobile} = useMatchMedia()
+    const scope = useRef<HTMLDivElement>(null);
+    const {isTablet, isMobile} = useMatchMedia();
     return (
         <section id={'collection'} ref={scope} className={classes.section}>
-            {!isMobile ?
-                <Carousel items={itemForCarousel.slice(0, 10)} scope={scope} direction={'left'} itemSize={isMobile ? 135 : isTablet ? 330 : 400}/>:
-                <CarouselMobile items={itemForCarousel.slice(0, 10)} direction={'left'} itemSize={isMobile ? 135 : isTablet ? 330 : 400}/>
-            }
+            {!isMobile ? (
+                <Carousel
+                    items={itemForCarousel.slice(0, 10)}
+                    scope={scope}
+                    direction={'left'}
+                    itemSize={isMobile ? 135 : isTablet ? 330 : 400}
+                />
+            ) : (
+                <CarouselMobile
+                    items={itemForCarousel.slice(0, 10)}
+                    direction={'left'}
+                    itemSize={isMobile ? 135 : isTablet ? 330 : 400}
+                />
+            )}
             <div className={classes.container}>
-                <h3 className={classes.text}>We introduce baton to share <br/> our agency spirit</h3>
+                <h3 className={classes.text}>
+                    We introduce baton to share <br /> our agency spirit
+                </h3>
             </div>
-            {!isMobile ?
-                <Carousel items={itemForCarousel.slice(10, 20)} scope={scope} direction={'right'} itemSize={isMobile ? 135 : isTablet ? 330 : 400}/>:
-                <CarouselMobile items={itemForCarousel.slice(10, 20)} direction={'right'} itemSize={isMobile ? 135 : isTablet ? 330 : 400}/>
-            }
+            {!isMobile ? (
+                <Carousel
+                    items={itemForCarousel.slice(10, 20)}
+                    scope={scope}
+                    direction={'right'}
+                    itemSize={isMobile ? 135 : isTablet ? 330 : 400}
+                />
+            ) : (
+                <CarouselMobile
+                    items={itemForCarousel.slice(10, 20)}
+                    direction={'right'}
+                    itemSize={isMobile ? 135 : isTablet ? 330 : 400}
+                />
+            )}
         </section>
     );
 };

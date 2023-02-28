@@ -10,7 +10,7 @@ import {userSlice} from '../../store/reducers/UserReducer/UserSlice';
 import MintButton from '../MintButton/MintButton';
 
 const WelcomeSection = () => {
-    const {isTablet, isMobile} = useMatchMedia()
+    const {isTablet, isMobile} = useMatchMedia();
     return (
         <section className={classes.section}>
             <div className={classes.container}>
@@ -23,10 +23,10 @@ const WelcomeSection = () => {
                     <h1 style={{marginBottom: 24}}>
                         and <span className={classes.selectText}>customers</span>
                     </h1>
-                    <MintButton/>
+                    <MintButton />
                 </div>
                 <MainImage />
-                {!(isTablet || isMobile) &&
+                {!(isTablet || isMobile) && (
                     <ButtonPageDown
                         label={'DISCOVER'}
                         style={{
@@ -36,7 +36,7 @@ const WelcomeSection = () => {
                             transform: 'translate(-50%, 50%)',
                         }}
                     />
-                }
+                )}
             </div>
         </section>
     );

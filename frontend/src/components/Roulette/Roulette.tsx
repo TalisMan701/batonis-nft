@@ -7,7 +7,13 @@ import {userSlice} from '../../store/reducers/UserReducer/UserSlice';
 import {INFTData} from '../../models/INFTData';
 import {IRarity} from '../../models/IRarity';
 import Loading from '../../pages/Loading/Loading';
-import {approvePaymentToken, buyProcess, changeChainId, checkChainId, getPaymentAllowance} from '../../api/web3';
+import {
+    approvePaymentToken,
+    buyProcess,
+    changeChainId,
+    checkChainId,
+    getPaymentAllowance,
+} from '../../api/web3';
 import {getFromLocalStorage} from '../../utils/localstorage';
 import {_connectWallet, _mint} from '../../store/reducers/UserReducer/UserActionCreators';
 import {generateUEID} from '../../utils/generateUEID';
@@ -133,11 +139,11 @@ const items: INFTData[] = [
         cid: 'bafkreibipqzz7rvyl4a5kqzwezqthriqc4silzt7isnjog6ugbzlslq4bi',
         rarity: 'common',
     },
-]
+];
 
-interface RouletteProps{
-    sizeItems?: number
-    marginItem?: number
+interface RouletteProps {
+    sizeItems?: number;
+    marginItem?: number;
 }
 
 type Chances = {[key: string]: number};
@@ -173,9 +179,17 @@ const chancedRandom = (chances: Chances) => {
     return name;
 };
 
-const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
-    const {iHaveDrop, currentAccount, fetchMint, fetchBuildRoulette, myDrop, mintStage, progressMinting} = useAppSelector(state => state.user)
-    const dispatch = useAppDispatch()
+const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem = 16}) => {
+    const {
+        iHaveDrop,
+        currentAccount,
+        fetchMint,
+        fetchBuildRoulette,
+        myDrop,
+        mintStage,
+        progressMinting,
+    } = useAppSelector((state) => state.user);
+    const dispatch = useAppDispatch();
     const [properties, setProperties] = useState<{
         result: INFTData;
         itemsBefore: INFTData[];
@@ -185,15 +199,15 @@ const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
 
     const [margin, setMargin] = useState<number>(0);
 
-    const wrapperRef = useRef<HTMLDivElement>(null)
-
-    useEffect(()=>{
-        dispatch(_mint(currentAccount))
-    },[])
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if(!fetchMint && myDrop){
-            dispatch(userSlice.actions.setFetchBuildRoulette(true))
+        dispatch(_mint(currentAccount));
+    }, []);
+
+    useEffect(() => {
+        if (!fetchMint && myDrop) {
+            dispatch(userSlice.actions.setFetchBuildRoulette(true));
             const getRandomItem = (chances: Chances) => {
                 const rolledRarity = chancedRandom(chances);
                 const rolledItems = items.filter(({rarity}) => rarity === rolledRarity);
@@ -201,55 +215,88 @@ const Roulette: FC<RouletteProps> = ({sizeItems = 400, marginItem= 16}) => {
             };
 
             const result = {...myDrop};
-            const itemWidth = sizeItems + marginItem*2;
+            const itemWidth = sizeItems + marginItem * 2;
             const resultIndex = lodash.random(15, 30);
             const innerOffset = 0.5;
 
             setProperties({
                 result: result,
-                itemsBefore: [...new Array(resultIndex).fill(0).map(() => getRandomItem(fakeChances))],
+                itemsBefore: [
+                    ...new Array(resultIndex).fill(0).map(() => getRandomItem(fakeChances)),
+                ],
                 itemsAfter: [...new Array(4).fill(0).map(() => getRandomItem(fakeChances))],
-                offset: itemWidth * (resultIndex + innerOffset) - (wrapperRef.current?.clientWidth || 0)/2,
+                offset:
+                    itemWidth * (resultIndex + innerOffset) -
+                    (wrapperRef.current?.clientWidth || 0) / 2,
             });
 
-            dispatch(userSlice.actions.setFetchBuildRoulette(false))
+            dispatch(userSlice.actions.setFetchBuildRoulette(false));
 
             setTimeout(() => dispatch(userSlice.actions.setIHaveDrop(true)), 10000);
         }
     }, [fetchMint]);
 
     useEffect(() => setMargin(properties ? -properties.offset : 0), [properties?.offset]);
-    const classNamesBG = `${classes.bg} ${iHaveDrop ? classes.bgForDrop: ''}`;
-    const classNamesWrapper = `${classes.wrapper} ${iHaveDrop ? classes.wrapperForDrop: ''}`;
-    const classNamesDrop = `${classes.img} ${iHaveDrop ? classes.drop: ''}`;
-    const classNamesItems = `${classes.items} ${iHaveDrop ? classes.itemsForDrop: ''}`;
+    const classNamesBG = `${classes.bg} ${iHaveDrop ? classes.bgForDrop : ''}`;
+    const classNamesWrapper = `${classes.wrapper} ${iHaveDrop ? classes.wrapperForDrop : ''}`;
+    const classNamesDrop = `${classes.img} ${iHaveDrop ? classes.drop : ''}`;
+    const classNamesItems = `${classes.items} ${iHaveDrop ? classes.itemsForDrop : ''}`;
 
-    if(fetchMint || fetchBuildRoulette) return <Loading stage={mintStage} infinity={true} animation={false} progress={progressMinting}/>
+    if (fetchMint || fetchBuildRoulette)
+        return (
+            <Loading
+                stage={mintStage}
+                infinity={true}
+                animation={false}
+                progress={progressMinting}
+            />
+        );
 
     return (
         <div className={classes.container}>
-            <div ref={wrapperRef} className={classNamesWrapper} >
-                {iHaveDrop &&
+            <div ref={wrapperRef} className={classNamesWrapper}>
+                {iHaveDrop && (
                     <div>
-                        <h3>Your <span>Baton</span></h3>
+                        <h3>
+                            Your <span>Baton</span>
+                        </h3>
                         {/* <p>Only 30% users have the same</p>*/}
                     </div>
-                }
-                <div className={classNamesItems} style={{transform: `translateX(${iHaveDrop ? 0 : margin}px)`}}>
-                    {!iHaveDrop && properties?.itemsBefore.map((item) => (
-                        <RouletteItem key={`${item.id}` + generateUEID()} item={{...item, size: sizeItems, margin: marginItem}}/>
-                    ))}
-                    {properties &&
-                        <img draggable={false} className={classNamesDrop} src={properties.result.img || items[properties.result.id].img} alt="Your NFT" style={{minWidth: sizeItems, height: sizeItems, margin: `0 ${marginItem}px`}}/>
-                    }
-                    {!iHaveDrop &&properties?.itemsAfter.map((item) => (
-                        <RouletteItem key={`${item.id}` + generateUEID()} item={{...item, size: sizeItems, margin: marginItem}}/>
-                    ))}
+                )}
+                <div
+                    className={classNamesItems}
+                    style={{transform: `translateX(${iHaveDrop ? 0 : margin}px)`}}
+                >
+                    {!iHaveDrop &&
+                        properties?.itemsBefore.map((item) => (
+                            <RouletteItem
+                                key={`${item.id}` + generateUEID()}
+                                item={{...item, size: sizeItems, margin: marginItem}}
+                            />
+                        ))}
+                    {properties && (
+                        <img
+                            draggable={false}
+                            className={classNamesDrop}
+                            src={properties.result.img || items[properties.result.id].img}
+                            alt='Your NFT'
+                            style={{
+                                minWidth: sizeItems,
+                                height: sizeItems,
+                                margin: `0 ${marginItem}px`,
+                            }}
+                        />
+                    )}
+                    {!iHaveDrop &&
+                        properties?.itemsAfter.map((item) => (
+                            <RouletteItem
+                                key={`${item.id}` + generateUEID()}
+                                item={{...item, size: sizeItems, margin: marginItem}}
+                            />
+                        ))}
                 </div>
-                <div className={classNamesBG} style={{height: sizeItems*1.3}}/>
-                {!iHaveDrop &&
-                    <div className={classes.overlay}/>
-                }
+                <div className={classNamesBG} style={{height: sizeItems * 1.3}} />
+                {!iHaveDrop && <div className={classes.overlay} />}
             </div>
         </div>
     );

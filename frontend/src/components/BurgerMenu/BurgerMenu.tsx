@@ -7,12 +7,17 @@ const BurgerMenu = () => {
     return (
         <div className={classes.wrapper}>
             <nav className={classes.links}>
-                <Link href={'#collection'} mode={'secondary'}>Collection</Link>
-                <Link href={'#story'} mode={'secondary'}>Story</Link>
-                <Link href={'#projects'} mode={'secondary'}>Projects</Link>
+                <Link href={'#collection'} mode={'secondary'}>
+                    Collection
+                </Link>
+                <Link href={'#story'} mode={'secondary'}>
+                    Story
+                </Link>
+                <Link href={'#projects'} mode={'secondary'}>
+                    Projects
+                </Link>
             </nav>
-            <Socials/>
-            
+            <Socials />
         </div>
     );
 };

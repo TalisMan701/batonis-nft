@@ -4,8 +4,8 @@ import ButtonCloseModal from '../UiKit/ButtonCloseModal/ButtonCloseModal';
 import {useTimeout} from '../../hooks/useTimeout';
 
 interface IToastProps {
-    close: () => void,
-    children: React.ReactNode
+    close: () => void;
+    children: React.ReactNode;
 }
 
 const Toast: FC<IToastProps> = ({close, children}) => {
@@ -13,7 +13,7 @@ const Toast: FC<IToastProps> = ({close, children}) => {
     return (
         <div className={classes.toast}>
             <div className={classes.toastContentWrapper}>{children}</div>
-            <ButtonCloseModal onClick={close} style={{position: 'absolute', top: 0, left: -36}}/>
+            <ButtonCloseModal onClick={close} style={{position: 'absolute', top: 0, left: -36}} />
         </div>
     );
 };

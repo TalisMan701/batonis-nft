@@ -8,7 +8,7 @@ function _serialize(wallet: string) {
     return stringify({
         wallet,
         nonce: Date.now() % 1000,
-        message: ['H', 'i', ' ', 'b', 'o', 't', 's'].join('')
+        message: ['H', 'i', ' ', 'b', 'o', 't', 's'].join(''),
     });
 }
 
@@ -22,7 +22,7 @@ function _offsets(len: number) {
         [0, len - 32], // [0 32]
         [len - 32, len - 22], // [32 42]
         [len - 22, len - 2], // [42 62]
-        [len - 2, len] // [62 64]
+        [len - 2, len], // [62 64]
     ];
 }
 /**
@@ -36,7 +36,7 @@ function _mixer(string: string, offsets: number[][]) {
         string.slice(...offsets[0]),
         string.slice(...offsets[1]),
         string.slice(...offsets[2]),
-        string.slice(...offsets[3])
+        string.slice(...offsets[3]),
     ];
 }
 /**

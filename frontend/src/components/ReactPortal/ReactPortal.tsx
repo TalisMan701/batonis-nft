@@ -2,8 +2,8 @@ import React, {FC, useLayoutEffect, useState} from 'react';
 import {createPortal} from 'react-dom';
 
 interface IReactPortal {
-    wrapperId: string,
-    children: React.ReactNode,
+    wrapperId: string;
+    children: React.ReactNode;
 }
 
 function createWrapperAndAppendToBody(wrapperId: string) {
@@ -27,7 +27,7 @@ const ReactPortal: FC<IReactPortal> = ({children, wrapperId = 'react-portal-wrap
             if (systemCreated && element && element.parentNode) {
                 element.parentNode.removeChild(element);
             }
-        }
+        };
     }, [wrapperId]);
 
     if (wrapperElement === null) return null;

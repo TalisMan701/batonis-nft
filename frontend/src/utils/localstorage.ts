@@ -5,7 +5,7 @@ export function getFromLocalStorage(key: string, defValue: any) {
         value = null;
     }
 
-    return (value == null) ? defValue : value;
+    return value == null ? defValue : value;
 }
 
 export function setToLocalStorage(key: string, value: any) {
@@ -13,5 +13,5 @@ export function setToLocalStorage(key: string, value: any) {
         return;
     }
 
-    return localStorage.setItem(key, `${ value }`);
+    return localStorage.setItem(key, `${value}`);
 }

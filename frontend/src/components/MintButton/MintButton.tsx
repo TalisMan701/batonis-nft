@@ -13,35 +13,37 @@ const MintButton: FC = () => {
     const clickHandler = async () => {
         if (!currentAccount) {
             const address = await connectWallet();
-            if(!address) {
-                dispatch(toastsSlice.actions.show('Connect wallet'))
-                return
+            if (!address) {
+                dispatch(toastsSlice.actions.show('Connect wallet'));
+                return;
             }
-            await dispatch(userSlice.actions.setCurrentAccount(address))
+            await dispatch(userSlice.actions.setCurrentAccount(address));
         }
 
         // Wrong chain
         if (!isRightChainId) {
-            const changedChainId = await changeChainId()
-            console.log(changedChainId)
-            if(!changedChainId) {
-                dispatch(toastsSlice.actions.show(
-                    <span>
-                    You are not on the {worknet.chainName} network.
-                    Please <Button size={'s'} label={'Switch Network'} onClick={changeChainId}/>
-                </span>
-                ))
-                return
+            const changedChainId = await changeChainId();
+            console.log(changedChainId);
+            if (!changedChainId) {
+                dispatch(
+                    toastsSlice.actions.show(
+                        <span>
+                            You are not on the {worknet.chainName} network. Please{' '}
+                            <Button size={'s'} label={'Switch Network'} onClick={changeChainId} />
+                        </span>,
+                    ),
+                );
+                return;
             }
             await dispatch(userSlice.actions.setIsRightChainId(changedChainId));
         }
 
-        dispatch(userSlice.actions.setGoRoulette(true))
-    }
+        dispatch(userSlice.actions.setGoRoulette(true));
+    };
     return (
         <Button
             label={'Mint NFT'}
-            size={isMobile? 'm' :'l'}
+            size={isMobile ? 'm' : 'l'}
             onClick={clickHandler}
             style={{width: isMobile ? '100%' : 'auto'}}
         />

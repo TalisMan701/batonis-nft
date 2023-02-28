@@ -3,7 +3,7 @@ import classes from './RouletteItem.module.scss';
 import {INFTData} from '../../../models/INFTData';
 
 interface RouletteItemProps {
-    item: INFTData & {size: number, margin: number};
+    item: INFTData & {size: number; margin: number};
 }
 
 const RouletteItem: FC<RouletteItemProps> = ({item}) => {
@@ -11,7 +11,12 @@ const RouletteItem: FC<RouletteItemProps> = ({item}) => {
         <div
             draggable={false}
             className={classes.item}
-            style={{backgroundImage: `url(${item.img})`, minWidth: item.size, height: item.size, margin: `0 ${item.margin}px`}}
+            style={{
+                backgroundImage: `url(${item.img})`,
+                minWidth: item.size,
+                height: item.size,
+                margin: `0 ${item.margin}px`,
+            }}
         >
             {/* <img className={classes.img} src={item.url} alt=""/>*/}
         </div>

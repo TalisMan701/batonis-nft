@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import classes from './InfinityText.module.scss';
 import Marquee from 'react-fast-marquee';
 
-interface InfinityTextProps{
+interface InfinityTextProps {
     children: React.ReactNode;
 }
 

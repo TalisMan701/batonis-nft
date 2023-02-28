@@ -6,18 +6,18 @@ import toastsReducer from './reducers/ToastsReducer/ToastsSlice';
 const rootReducer = combineReducers({
     user: userReducer,
     modals: modalsReducer,
-    toasts: toastsReducer
+    toasts: toastsReducer,
 });
 
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
-        middleware: getDefaultMiddleware =>
+        middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
                 serializableCheck: false,
             }),
-    })
-}
+    });
+};
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
