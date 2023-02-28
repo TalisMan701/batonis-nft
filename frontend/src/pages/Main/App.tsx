@@ -26,7 +26,7 @@ import Button from '../../components/UiKit/Button/Button';
 
 const App = () => {
     const {connectWalletModalIsOpen, mintModalIsOpen} = useAppSelector(state => state.modals);
-    const {isRightChainId, isLoading, goRoulette, iHaveDrop} = useAppSelector(state => state.user);
+    const {isRightChainId, isLoading, goRoulette, iHaveDrop, currentAccount} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch()
     const {isMobile, isTablet, isDesktop, isDesktopXL} = useMatchMedia();
     useEffect(()=>{
@@ -35,7 +35,7 @@ const App = () => {
     },[])
 
     useEffect(()=>{
-        if(isRightChainId === false){
+        if(isRightChainId === false && currentAccount){
             dispatch(toastsSlice.actions.show(
                 <span>
                     You are not on the {worknet.chainName} network.

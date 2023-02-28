@@ -99,7 +99,7 @@ const Header = () => {
                             <nav className={classes.links}>
                                 <Link href={'#collection'} mode={'secondary'}>Collection</Link>
                                 <Link href={'#story'} mode={'secondary'}>Story</Link>
-                                <Link href={'#projects'} mode={'secondary'}>Projects</Link>
+                                <Link href={'#projects'} mode={'secondary'}>Contacts</Link>
                             </nav>
                             <div className={classes.forUser}>
                                 <Socials/>
